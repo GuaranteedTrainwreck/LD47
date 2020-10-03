@@ -1,10 +1,10 @@
 extends Node2D
 
 # instances preload
-const HOOL = preload("res://Scenes/HulaHoopers/HulaHooper.tscn")
+const HOOL = preload("res://Scenes/Hoopers/HulaHooper.tscn")
 
 # countdown/up variables
-var deaths = 0
+export var deaths = 0
 var coolness = 50
 var spawnrate = 3
 
