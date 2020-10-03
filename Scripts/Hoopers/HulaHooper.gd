@@ -60,6 +60,7 @@ func _physics_process(delta):
 	
 #	at death
 	if !todeath:
+		incident = false
 		dead = true
 		self.rotation_degrees = 180
 		hoopTimer.stop()
@@ -80,10 +81,9 @@ func _on_HulaHooper_input_event(viewport, event, shape_idx):
 	infirmarySelected = get_parent().get_node("Infirmary").selected
 	
 #	heal Hooper
-	if event.is_action_pressed("player_action") and incident and !dead and infirmarySelected:
+	if event.is_action_pressed("player_action") and incident and infirmarySelected:
 		self.rotation_degrees = 0
 		toincident = rng.randf_range(5, 20)
 		toincident = int(toincident)
 		incident = false
 		get_parent().get_node("Infirmary").selected = false
-		

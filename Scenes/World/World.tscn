@@ -31,4 +31,6 @@ position = Vector2( 168, 96 )
 
 [node name="Staffcabin" parent="." instance=ExtResource( 3 )]
 position = Vector2( 416, 96 )
+
+[node name="HideScreen" type="StaticBody2D" parent="."]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_GlobalTimer_timeout"]

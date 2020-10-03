@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 var onDuty = true
-export var selected = false
+var selected = false
 
 func _ready():
 	pass

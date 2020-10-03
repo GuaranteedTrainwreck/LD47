@@ -4,7 +4,7 @@ extends Node2D
 const HOOL = preload("res://Scenes/Hoopers/HulaHooper.tscn")
 
 # countdown/up variables
-export var deaths = 0
+var deaths = 0
 var coolness = 50
 var spawnrate = 3
 
