@@ -4,9 +4,10 @@ extends Node2D
 const HOOL = preload("res://Scenes/Hoopers/HulaHooper.tscn")
 
 # countdown/up variables
-var deaths = 0
+var deathsTotal = 0
+var incidentsTotal = 0
 var coolness = 50
-var spawnrate = 3
+export var spawnRate = 3
 
 #get timer
 onready var timer = get_node("GlobalTimer")
@@ -20,16 +21,18 @@ func _ready():
 #AT RUNTIME
 func _physics_process(delta):
 #	UI changes
-	get_node("Deaths").text = "Deaths : " + str(deaths)
+	get_node("Deaths").text = "Deaths : " + str(deathsTotal)
+	get_node("Incidents").text = "Incidents : " + str(incidentsTotal)
 	get_node("Coolness").text = "Coolness : " + str(coolness)
 	
 #	spawn Hoopers
-	if !spawnrate:
+	if !spawnRate:
 		var newHool = HOOL.instance()
 		self.add_child(newHool)
-		spawnrate = 3
+		spawnRate = 3
 
 #EVERY SECOND
 func _on_GlobalTimer_timeout():
 	coolness -= 1
-	spawnrate -= 1
+	spawnRate -= 1
+

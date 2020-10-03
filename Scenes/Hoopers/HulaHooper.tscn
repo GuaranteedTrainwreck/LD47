@@ -20,6 +20,15 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="HoopTimer" type="Timer" parent="."]
+[node name="LeavingTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="IncidentTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="input_event" from="." to="." method="_on_HulaHooper_input_event"]
-[connection signal="timeout" from="HoopTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="LeavingTimer" to="." method="_on_LeavingTimer_timeout"]
+[connection signal="timeout" from="IncidentTimer" to="." method="_on_IncidentTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

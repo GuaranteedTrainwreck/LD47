@@ -13,5 +13,5 @@ func _physics_process(delta):
 		self.rotation_degrees = 0
 
 func _on_Infirmary_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("player_select") and onDuty:
+	if event.is_action_pressed("player_select") and get_parent().incidentsTotal > 0 and onDuty:
 		selected = true

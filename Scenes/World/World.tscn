@@ -24,6 +24,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Incidents" type="Label" parent="."]
+margin_left = 0.33371
+margin_top = 11.6798
+margin_right = 53.3337
+margin_bottom = 25.6798
+text = "Incidents :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="GlobalTimer" type="Timer" parent="."]
 
 [node name="Infirmary" parent="." instance=ExtResource( 1 )]
