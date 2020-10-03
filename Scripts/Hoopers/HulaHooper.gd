@@ -6,8 +6,6 @@ const XMAX = 608
 const YMIN = 224
 const YMAX = 608
 
-
-
 #create random
 var rng = RandomNumberGenerator.new()
 
@@ -23,13 +21,11 @@ var infirmarySelected = false
 
 # AT START
 func _ready():
-
 #	randomize
 	rng.randomize()
 	
 #	init and start leaving countdown
 	$LeavingTimer.set_wait_time(rng.randf_range(5, 20))
-	print($LeavingTimer.get_wait_time())
 	$LeavingTimer.start()
 	
 #	init and start incident countdown
@@ -87,5 +83,4 @@ func _on_IncidentTimer_timeout():
 
 #	LeavingTimer Signal
 func _on_LeavingTimer_timeout():
-	print("test")
 	self.queue_free()

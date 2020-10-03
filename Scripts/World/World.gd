@@ -33,6 +33,8 @@ func _physics_process(delta):
 
 #EVERY SECOND
 func _on_GlobalTimer_timeout():
-	coolness -= 1
 	spawnRate -= 1
+	
+	if get_node("Staffcabin").beingCool == false:
+		coolness -= 1
 
