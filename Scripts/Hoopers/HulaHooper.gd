@@ -17,7 +17,6 @@ var todeath = 10
 #booleans
 var incident = false
 var dead = false
-var infirmarySelected = false
 
 # AT START
 func _ready():
@@ -51,19 +50,16 @@ func _physics_process(_delta):
 
 #ON CLICK
 func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
-#	check if infirmary is selected
-	infirmarySelected = get_parent().get_node("Infirmary").selected
 	
 #	heal Hooper
-	if event.is_action_pressed("player_action") and incident and infirmarySelected:
+	if event.is_action_pressed("player_action") and incident and get_parent().healing:
 		$LeavingTimer.set_paused(false)
 		$DeathTimer.stop()
 		$IncidentTimer.set_wait_time(rng.randf_range(5, 20))
 		$IncidentTimer.start()
 		incident = false
 		get_parent().incidentsTotal -= 1
-		get_parent().get_node("Infirmary").selected = false
-		get_parent().get_node("Infirmary/Sprite").get_material().set_shader_param("outline_width", 0)
+		get_parent().get_node("Infirmary").ClickInfirmary()
 		$HooperAnim.play("hooping")
 
 #	DeathTimer Signal

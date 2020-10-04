@@ -1,30 +1,27 @@
 extends StaticBody2D
 
 
-var selected = false
+var targeted = false
 var beingCool = false
 
 func _ready():
 	pass
 
-#func _physics_process(delta):
-#	if selected:
-#		self.rotation_degrees = 180
-#	else:
-#		self.rotation_degrees = 0
+func _physics_process(delta):
+	beingCool = get_parent().beingCool
 
-func _on_Staffcabin_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("player_select") and !beingCool:
-		selected = true
+	if Input.is_action_just_pressed("player_select") and !beingCool and !get_parent().beingOnPhone and targeted:
 		$CabinTimer.set_wait_time(1)
 		$CabinTimer.start()
 		beingCool = true
+		if get_parent().healing:
+			get_parent().get_node("Infirmary").ClickInfirmary()
+
 		$AnimationPlayer.play("selected")
 		get_parent().get_node("Clouds").visible = true
 		get_parent().get_node("talkinghead").visible = true
 		get_parent().get_node("BeingCool").play("smoke")
-	elif event.is_action_pressed("player_select") and beingCool:
-		selected = false
+	elif Input.is_action_just_pressed("player_select") and beingCool:
 		beingCool = false
 		$CabinTimer.stop()
 		$AnimationPlayer.stop()
@@ -32,6 +29,13 @@ func _on_Staffcabin_input_event(viewport, event, shape_idx):
 		get_parent().get_node("Clouds").visible = false
 		get_parent().get_node("talkinghead").visible = false
 		get_parent().get_node("BeingCool").stop()
+	
+	get_parent().beingCool = beingCool
+
+func _on_Staffcabin_mouse_entered():
+	targeted = true
+func _on_Staffcabin_mouse_exited():
+	targeted = false
 
 func _on_CabinTimer_timeout():
 	get_parent().coolness += 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Infirmary/Infirmary.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/BeingCool/cloud5.png" type="Texture" id=9]
 [ext_resource path="res://Assets/BeingCool/cloud7.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Hoopers/hoopersTemp.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/Phone/Phone.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/BeingCool/cloud6.png" type="Texture" id=13]
 [ext_resource path="res://Assets/BeingCool/cloud3.png" type="Texture" id=14]
 
@@ -241,10 +242,10 @@ texture = ExtResource( 5 )
 
 [node name="talktest" type="Label" parent="talkinghead"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 155.959
-margin_top = -122.238
-margin_right = 710.959
-margin_bottom = -57.2378
+margin_left = 156.0
+margin_top = -122.0
+margin_right = 476.0
+margin_bottom = -57.0
 rect_scale = Vector2( 2, 2 )
 text = "\" WOW MAN WE ALL THOUGHT YOU WERE
 A TOTAL NERD BUT HERE YOU ARE BEING COOL ! 
@@ -253,4 +254,8 @@ SO RAD ! \""
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Phone" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1876, 1362 )
+z_index = 100
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_GlobalTimer_timeout"]
