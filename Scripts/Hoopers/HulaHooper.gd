@@ -60,27 +60,27 @@ func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 		$DeathTimer.stop()
 		$IncidentTimer.set_wait_time(rng.randf_range(5, 20))
 		$IncidentTimer.start()
-		self.rotation_degrees = 0
 		incident = false
 		get_parent().incidentsTotal -= 1
 		get_parent().get_node("Infirmary").selected = false
 		get_parent().get_node("Infirmary/Sprite").get_material().set_shader_param("outline_width", 0)
+		$HooperAnim.play("hooping")
 
 #	DeathTimer Signal
 func _on_DeathTimer_timeout():
 	incident = false
 	dead = true
-	self.rotation_degrees = 180
 	get_parent().incidentsTotal -= 1
 	get_parent().deathsTotal += 1
 	set_physics_process(false)
+	$HooperAnim.play("dead")
 
 #	IncidentTimer Signal
 func _on_IncidentTimer_timeout():
 	$LeavingTimer.set_paused(true)
 	incident = true
 	get_parent().incidentsTotal += 1
-	self.rotation_degrees = 90
+	$HooperAnim.play("suffocating")
 	$DeathTimer.start()
 
 #	LeavingTimer Signal
