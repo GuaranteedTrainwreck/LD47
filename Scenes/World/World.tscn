@@ -1,18 +1,37 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Infirmary/Infirmary.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Staffcabin/Staffcabin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/HideScreen/HideScreen.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Background/bgtemp.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Background/ground.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Background/dancefloor.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Background/sky.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Background/sun.png" type="Texture" id=8]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="bgtemp" type="Sprite" parent="."]
-position = Vector2( 320, 320 )
-scale = Vector2( 1.28, 1.28 )
+position = Vector2( 960, 540 )
+scale = Vector2( 1.28, 0.72 )
 texture = ExtResource( 5 )
+
+[node name="sky" type="Sprite" parent="."]
+position = Vector2( 960.125, 540 )
+scale = Vector2( 1.27983, 0.72 )
+texture = ExtResource( 7 )
+
+[node name="sun" type="Sprite" parent="."]
+position = Vector2( 1336, 540.718 )
+scale = Vector2( 0.698667, 0.720957 )
+texture = ExtResource( 8 )
+
+[node name="dancefloor" type="Sprite" parent="."]
+modulate = Color( 0.403922, 0.403922, 0.403922, 1 )
+position = Vector2( 960, 544 )
+scale = Vector2( 1.27967, 0.72 )
+texture = ExtResource( 6 )
 
 [node name="Coolness" type="Label" parent="."]
 margin_left = 512.0
@@ -44,10 +63,10 @@ __meta__ = {
 [node name="GlobalTimer" type="Timer" parent="."]
 
 [node name="Infirmary" parent="." instance=ExtResource( 1 )]
-position = Vector2( 144, 112 )
+position = Vector2( 304, 368 )
 
 [node name="Staffcabin" parent="." instance=ExtResource( 3 )]
-position = Vector2( 504, 128 )
+position = Vector2( 1344, 464 )
 
 [node name="HideScreen" parent="." instance=ExtResource( 4 )]
 z_index = 100

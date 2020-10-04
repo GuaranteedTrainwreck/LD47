@@ -1,10 +1,10 @@
 extends StaticBody2D
 
 #dancefloor limits
-const XMIN = 32
-const XMAX = 608
-const YMIN = 224
-const YMAX = 608
+const XMIN = 30
+const XMAX = 1920
+const YMIN = 608
+const YMAX = 1080
 
 #create random
 var rng = RandomNumberGenerator.new()
