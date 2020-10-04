@@ -44,6 +44,7 @@ func _ready():
 	self.position.x = x
 	self.position.y = y
 
+
 #AT RUNTIME
 func _physics_process(_delta):
 	pass
@@ -63,6 +64,7 @@ func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 		incident = false
 		get_parent().incidentsTotal -= 1
 		get_parent().get_node("Infirmary").selected = false
+		get_parent().get_node("Infirmary/Sprite").get_material().set_shader_param("outline_width", 0)
 
 #	DeathTimer Signal
 func _on_DeathTimer_timeout():
