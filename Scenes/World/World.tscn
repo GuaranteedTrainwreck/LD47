@@ -1,13 +1,119 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Infirmary/Infirmary.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Staffcabin/Staffcabin.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/HideScreen/HideScreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/BeingCool/cloud2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Background/ground.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Background/dancefloor.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Background/sky.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Background/sun.png" type="Texture" id=8]
+[ext_resource path="res://Assets/BeingCool/cloud5.png" type="Texture" id=9]
+[ext_resource path="res://Assets/BeingCool/cloud7.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Hoopers/hoopersTemp.png" type="Texture" id=11]
+[ext_resource path="res://Assets/BeingCool/cloud6.png" type="Texture" id=13]
+[ext_resource path="res://Assets/BeingCool/cloud3.png" type="Texture" id=14]
+
+[sub_resource type="Animation" id=1]
+resource_name = "smoke"
+length = 13.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Clouds/cloud3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.3, 6.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 832, 1016 ), Vector2( 1656, 1032 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Clouds/cloud5:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.1, 7.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 608, 1040 ), Vector2( -16, 920 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Clouds/cloud7:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.6, 8.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1208, 616 ), Vector2( 1872, 616 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Clouds/cloud2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3, 6.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 880, 984 ), Vector2( 1752, 928 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Clouds/cloud9:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.6, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 696, 1208 ), Vector2( 2440, 1200 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Clouds/cloud12:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.4, 6.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1256, 872 ), Vector2( 424, 872 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Clouds/cloud13:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 6.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1160, 400 ), Vector2( 2264, 416 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Clouds/cloud14:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.6, 7.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1464, 800 ), Vector2( 168, 832 ) ]
+}
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
@@ -37,6 +143,7 @@ texture = ExtResource( 6 )
 margin_left = 512.0
 margin_right = 552.0
 margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
 text = "Coolness :"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -45,6 +152,7 @@ __meta__ = {
 [node name="Deaths" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
 text = "Deaths :"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -55,7 +163,18 @@ margin_left = 201.334
 margin_top = 0.6798
 margin_right = 269.334
 margin_bottom = 14.6798
+rect_scale = Vector2( 2, 2 )
 text = "Incidents :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chaos" type="Label" parent="."]
+margin_left = 816.0
+margin_right = 856.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
+text = "Chaos :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -68,6 +187,70 @@ position = Vector2( 304, 368 )
 [node name="Staffcabin" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1344, 464 )
 
-[node name="HideScreen" parent="." instance=ExtResource( 4 )]
+[node name="BeingCool" type="AnimationPlayer" parent="."]
+anims/smoke = SubResource( 1 )
+
+[node name="Clouds" type="Node2D" parent="."]
+visible = false
 z_index = 100
+
+[node name="cloud3" type="Sprite" parent="Clouds"]
+position = Vector2( 870.625, 1016.75 )
+texture = ExtResource( 14 )
+
+[node name="cloud5" type="Sprite" parent="Clouds"]
+position = Vector2( 505.552, 1020.3 )
+texture = ExtResource( 9 )
+
+[node name="cloud7" type="Sprite" parent="Clouds"]
+position = Vector2( 1281.78, 616 )
+texture = ExtResource( 10 )
+
+[node name="cloud2" type="Sprite" parent="Clouds"]
+position = Vector2( 916.845, 981.634 )
+texture = ExtResource( 4 )
+
+[node name="cloud9" type="Sprite" parent="Clouds"]
+position = Vector2( 833.684, 1207.37 )
+texture = ExtResource( 4 )
+
+[node name="cloud12" type="Sprite" parent="Clouds"]
+position = Vector2( 1206.33, 872 )
+texture = ExtResource( 9 )
+
+[node name="cloud13" type="Sprite" parent="Clouds"]
+position = Vector2( 1192.96, 400.478 )
+texture = ExtResource( 13 )
+
+[node name="cloud14" type="Sprite" parent="Clouds"]
+position = Vector2( 1340.57, 803.048 )
+texture = ExtResource( 10 )
+
+[node name="talkinghead" type="Sprite" parent="."]
+visible = false
+position = Vector2( 168, 936 )
+scale = Vector2( 1.89794, 1.89794 )
+z_index = 101
+texture = ExtResource( 11 )
+
+[node name="ground" type="Sprite" parent="talkinghead"]
+modulate = Color( 0.117647, 0.870588, 1, 0.505882 )
+position = Vector2( 461.553, -56.9038 )
+scale = Vector2( 0.45804, 0.103972 )
+texture = ExtResource( 5 )
+
+[node name="talktest" type="Label" parent="talkinghead"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 155.959
+margin_top = -122.238
+margin_right = 710.959
+margin_bottom = -57.2378
+rect_scale = Vector2( 2, 2 )
+text = "\" WOW MAN WE ALL THOUGHT YOU WERE
+A TOTAL NERD BUT HERE YOU ARE BEING COOL ! 
+
+SO RAD ! \""
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_GlobalTimer_timeout"]
