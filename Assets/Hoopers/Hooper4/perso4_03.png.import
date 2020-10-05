@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/perso_dancing-04.png-b45fd09b465d6b460bb480d5d21f615f.stex"
+path="res://.import/perso4_03.png-cc0ffa3ef06f23c7636a5efce71fc93d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hoopers/perso_dancing-04.png"
-dest_files=[ "res://.import/perso_dancing-04.png-b45fd09b465d6b460bb480d5d21f615f.stex" ]
+source_file="res://Assets/Hoopers/Hooper4/perso4_03.png"
+dest_files=[ "res://.import/perso4_03.png-cc0ffa3ef06f23c7636a5efce71fc93d.stex" ]
 
 [params]
 

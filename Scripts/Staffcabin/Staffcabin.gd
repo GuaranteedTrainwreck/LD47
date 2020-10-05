@@ -18,17 +18,17 @@ func _physics_process(delta):
 			get_parent().get_node("Infirmary").ClickInfirmary()
 
 		$AnimationPlayer.play("selected")
-		get_parent().get_node("Clouds").visible = true
+		get_parent().get_node("BeingCool/Clouds").visible = true
 		get_parent().get_node("talkinghead").visible = true
-		get_parent().get_node("BeingCool").play("smoke")
+		get_parent().get_node("BeingCool/BeingCoolAnim").play("smoke")
 	elif Input.is_action_just_pressed("player_select") and beingCool:
 		beingCool = false
 		$CabinTimer.stop()
 		$AnimationPlayer.stop()
 		$AnimationPlayer.seek(0, true)
-		get_parent().get_node("Clouds").visible = false
+		get_parent().get_node("BeingCool/Clouds").visible = false
 		get_parent().get_node("talkinghead").visible = false
-		get_parent().get_node("BeingCool").stop()
+		get_parent().get_node("BeingCool/BeingCoolAnim").stop()
 	
 	get_parent().beingCool = beingCool
 

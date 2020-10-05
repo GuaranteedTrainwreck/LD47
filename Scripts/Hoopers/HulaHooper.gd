@@ -1,13 +1,16 @@
 extends StaticBody2D
 
 #dancefloor limits
-const XMIN = 30
-const XMAX = 1920
-const YMIN = 608
-const YMAX = 1080
+const XMIN = 448
+const XMAX = 1464
+const YMIN = 568
+const YMAX = 1000
 
 #create random
 var rng = RandomNumberGenerator.new()
+
+var characterId = 1
+var characterName = "Hooper1"
 
 #countdowns
 var toleaving = 0
@@ -15,19 +18,27 @@ var toincident = 0
 var todeath = 10
 
 #booleans
-var incident = false
+var suffocating = false
 var dead = false
+var infirmaryClicked = false
+var ambulanceClicked = false
 
 # AT START
 func _ready():
 #	randomize
 	rng.randomize()
 	
+#	choose random character
+	characterId = rng.randf_range(1, 5)
+	characterId = int(characterId)
+	characterName = "Hooper" + str(characterId)
+	get_node(characterName).visible = true
+	
 #	init and start leaving countdown
 	$LeavingTimer.set_wait_time(rng.randf_range(5, 20))
 	$LeavingTimer.start()
 	
-#	init and start incident countdown
+#	init and start suffocating countdown
 	$IncidentTimer.set_wait_time(rng.randf_range(5, 20))
 	$IncidentTimer.start()
 
@@ -46,23 +57,25 @@ func _ready():
 
 #AT RUNTIME
 func _physics_process(_delta):
-	pass
+	infirmaryClicked = get_parent().infirmaryClicked
+	ambulanceClicked = get_parent().ambulanceClicked
 
 #ON CLICK
 func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 #	heal Hooper
-	if event.is_action_pressed("player_action") and incident and get_parent().healing:
+	if event.is_action_pressed("player_action") and suffocating and infirmaryClicked:
 		$LeavingTimer.set_paused(false)
 		$DeathTimer.stop()
 		$IncidentTimer.set_wait_time(rng.randf_range(5, 20))
 		$IncidentTimer.start()
-		incident = false
+		suffocating = false
+		get_parent().infirmaryClicked = false
 		get_parent().incidentsTotal -= 1
-		get_parent().get_node("Infirmary").ClickInfirmary()
-		$HooperAnim.play("hooping")
+		get_parent().get_node("Infirmary/AnimatedSprite").get_material().set_shader_param("outline_width", 0)
+		get_node(characterName).play("hooping")
 		
 #	pick up dead body
-	if event.is_action_pressed("player_action") and dead and get_parent().ambulanceClicked:
+	if event.is_action_pressed("player_action") and dead and ambulanceClicked:
 		self.queue_free()
 		get_parent().deathsTotal -= 1
 		get_parent().ambulanceReady = false
@@ -71,19 +84,19 @@ func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 
 #	DeathTimer Signal
 func _on_DeathTimer_timeout():
-	incident = false
+	suffocating = false
 	dead = true
 	get_parent().incidentsTotal -= 1
 	get_parent().deathsTotal += 1
 	set_physics_process(false)
-	$HooperAnim.play("dead")
+	get_node(characterName).play("dead")
 
 #	IncidentTimer Signal
 func _on_IncidentTimer_timeout():
 	$LeavingTimer.set_paused(true)
-	incident = true
+	suffocating = true
 	get_parent().incidentsTotal += 1
-	$HooperAnim.play("suffocating")
+	get_node(characterName).play("suffocating")
 	$DeathTimer.start()
 
 #	LeavingTimer Signal

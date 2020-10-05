@@ -11,13 +11,22 @@ var chaos = 0
 var coolnessSubFactor = 1
 export var spawnRate = 3
 
+#create random
+var rng = RandomNumberGenerator.new()
+
 #booleans
 var beingOnPhone = false
 var beingCool = false
-var healing = false
+var infirmaryClicked = false
 var smsReceived = false
 var ambulanceReady = true
 var ambulanceClicked = false
+
+#dancefloor things
+var danceColors = ["a2ffcd", "ffffff", "4cafff"]
+var color1 = 0
+var color2 = 0
+var color3 = 0
 
 #endgame timers
 var smsUnanswered = 20
@@ -27,6 +36,9 @@ onready var timer = get_node("GlobalTimer")
 
 #AT START
 func _ready():
+#	randomize
+	rng.randomize()
+	
 #	init timer
 	timer.set_wait_time(1)
 	timer.start()
@@ -36,12 +48,10 @@ func _physics_process(_delta):
 	chaos = deathsTotal + incidentsTotal
 
 #	UI changes
-	get_node("Deaths").text = "Deaths : " + str(deathsTotal)
-	get_node("Incidents").text = "Incidents : " + str(incidentsTotal)
-	get_node("Coolness").text = "Coolness : " + str(coolness)
-	get_node("Chaos").text = "Chaos : " + str(chaos)
-	
-
+	get_node("Stats/Deaths").text = "Deaths : " + str(deathsTotal)
+	get_node("Stats/Incidents").text = "Incidents : " + str(incidentsTotal)
+	get_node("Stats/Coolness").text = "Coolness : " + str(coolness)
+	get_node("Stats/Chaos").text = "Chaos : " + str(chaos)
 
 #	spawn Hoopers
 	if !spawnRate:
@@ -51,6 +61,10 @@ func _physics_process(_delta):
 
 #EVERY SECOND
 func _on_GlobalTimer_timeout():
+	color1 = rng.randf_range(0, 3)
+	color2 = rng.randf_range(0, 3)
+	color3 = rng.randf_range(0, 3)
+	
 	spawnRate -= 1
 	
 	if get_node("Staffcabin").beingCool == false:
@@ -72,4 +86,8 @@ func _on_GlobalTimer_timeout():
 	if coolness <= 0:
 		$NOTCOOL.visible = true
 	
-	
+#	dancefloor change colors
+	if (coolness % 2 == 0):
+		$Backgrounds/Dancefloor/Dancefloor1.modulate = danceColors[color1]
+		$Backgrounds/Dancefloor/Dancefloor2.modulate = danceColors[color2]
+		$Backgrounds/Dancefloor/Dancefloor3.modulate = danceColors[color3]

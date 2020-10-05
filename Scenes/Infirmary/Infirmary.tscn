@@ -1,17 +1,31 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Infirmary/cross.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Infirmary/Infirmary.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Shaders/outline.shader" type="Shader" id=3]
 [ext_resource path="res://Assets/Infirmary/infirmarynocross.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Infirmary/crossoff.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 136, 168 )
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
-shader_param/outline_width = 3.0
+shader_param/outline_width = 0.0
 shader_param/outline_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "blinking",
+"speed": 2.0
+} ]
 
 [node name="Infirmary" type="StaticBody2D"]
 input_pickable = true
@@ -26,9 +40,11 @@ position = Vector2( -0.533447, -0.208603 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 2 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 4 )
 position = Vector2( -0.533478, 0.458817 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 1 )
+frames = SubResource( 3 )
+animation = "idle"
+playing = true
 [connection signal="input_event" from="." to="." method="_on_Infirmary_input_event"]

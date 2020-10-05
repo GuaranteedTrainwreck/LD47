@@ -1,23 +1,29 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Infirmary/Infirmary.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Staffcabin/Staffcabin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/BeingCool/cloud2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Background/ground.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Background/dancefloor.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Background/dancefloor2.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Background/sky.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Background/sun.png" type="Texture" id=8]
 [ext_resource path="res://Assets/BeingCool/cloud5.png" type="Texture" id=9]
 [ext_resource path="res://Assets/BeingCool/cloud7.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Hoopers/hoopersTemp.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Hoopers/Hooper1/hoopersTemp.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Phone/Phone.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/BeingCool/cloud6.png" type="Texture" id=13]
 [ext_resource path="res://Assets/BeingCool/cloud3.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Ambulance/Ambulance.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Fonts/nokiafc22.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://Assets/Background/dancefloor3.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Background/dancefloor1.png" type="Texture" id=18]
 
-[sub_resource type="Animation" id=1]
-resource_name = "smoke"
+[sub_resource type="DynamicFont" id=1]
+size = 25
+font_data = ExtResource( 16 )
+
+[sub_resource type="Animation" id=2]
 length = 13.0
 loop = true
 tracks/0/type = "value"
@@ -119,63 +125,86 @@ tracks/7/keys = {
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 
-[node name="bgtemp" type="Sprite" parent="."]
-position = Vector2( 960, 540 )
-scale = Vector2( 1.28, 0.72 )
-texture = ExtResource( 5 )
-
-[node name="sky" type="Sprite" parent="."]
-position = Vector2( 960.125, 540 )
-scale = Vector2( 1.27983, 0.72 )
-texture = ExtResource( 7 )
-
-[node name="sun" type="Sprite" parent="."]
+[node name="Backgrounds" type="Node2D" parent="."]
 position = Vector2( 1336, 540.718 )
 scale = Vector2( 0.698667, 0.720957 )
+
+[node name="Sand" type="Sprite" parent="Backgrounds"]
+position = Vector2( -538.168, -0.995911 )
+scale = Vector2( 1.83206, 0.998673 )
+texture = ExtResource( 5 )
+
+[node name="Sky" type="Sprite" parent="Backgrounds"]
+position = Vector2( -537.989, -0.995911 )
+scale = Vector2( 1.83182, 0.998673 )
+texture = ExtResource( 7 )
+
+[node name="Sun" type="Sprite" parent="Backgrounds"]
 texture = ExtResource( 8 )
 
-[node name="dancefloor" type="Sprite" parent="."]
-modulate = Color( 0.403922, 0.403922, 0.403922, 1 )
-position = Vector2( 960, 544 )
-scale = Vector2( 1.27967, 0.72 )
+[node name="Dancefloor" type="Node2D" parent="Backgrounds"]
+modulate = Color( 1, 1, 1, 0.607843 )
+position = Vector2( -538.168, -62.0259 )
+scale = Vector2( 1.5, 1.5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Dancefloor1" type="Sprite" parent="Backgrounds/Dancefloor"]
+texture = ExtResource( 18 )
+
+[node name="Dancefloor2" type="Sprite" parent="Backgrounds/Dancefloor"]
 texture = ExtResource( 6 )
 
-[node name="Coolness" type="Label" parent="."]
-margin_left = 512.0
-margin_right = 552.0
-margin_bottom = 14.0
-rect_scale = Vector2( 2, 2 )
+[node name="Dancefloor3" type="Sprite" parent="Backgrounds/Dancefloor"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 17 )
+
+[node name="Stats" type="Node2D" parent="."]
+
+[node name="Coolness" type="Label" parent="Stats"]
+margin_left = 656.0
+margin_top = 3.0
+margin_right = 808.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 1 )
 text = "Coolness :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Deaths" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-rect_scale = Vector2( 2, 2 )
+[node name="Deaths" type="Label" parent="Stats"]
+margin_left = 16.0
+margin_top = 2.0
+margin_right = 137.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 1 )
 text = "Deaths :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Incidents" type="Label" parent="."]
-margin_left = 201.334
-margin_top = 0.6798
-margin_right = 269.334
-margin_bottom = 14.6798
-rect_scale = Vector2( 2, 2 )
+[node name="Incidents" type="Label" parent="Stats"]
+margin_left = 304.0
+margin_top = 3.0
+margin_right = 458.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 1 )
 text = "Incidents :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Chaos" type="Label" parent="."]
-margin_left = 816.0
-margin_right = 856.0
-margin_bottom = 14.0
-rect_scale = Vector2( 2, 2 )
+[node name="Chaos" type="Label" parent="Stats"]
+margin_left = 1008.0
+margin_top = 3.0
+margin_right = 1117.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 1 )
 text = "Chaos :"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -229,50 +258,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GlobalTimer" type="Timer" parent="."]
+[node name="BeingCool" type="Node2D" parent="."]
 
-[node name="Infirmary" parent="." instance=ExtResource( 1 )]
-position = Vector2( 304, 368 )
+[node name="BeingCoolAnim" type="AnimationPlayer" parent="BeingCool"]
+anims/smoke = SubResource( 2 )
 
-[node name="Staffcabin" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1344, 464 )
-
-[node name="BeingCool" type="AnimationPlayer" parent="."]
-anims/smoke = SubResource( 1 )
-
-[node name="Clouds" type="Node2D" parent="."]
+[node name="Clouds" type="Node2D" parent="BeingCool"]
 visible = false
 z_index = 100
 
-[node name="cloud3" type="Sprite" parent="Clouds"]
+[node name="cloud3" type="Sprite" parent="BeingCool/Clouds"]
 position = Vector2( 870.625, 1016.75 )
 texture = ExtResource( 14 )
 
-[node name="cloud5" type="Sprite" parent="Clouds"]
+[node name="cloud5" type="Sprite" parent="BeingCool/Clouds"]
 position = Vector2( 505.552, 1020.3 )
 texture = ExtResource( 9 )
 
-[node name="cloud7" type="Sprite" parent="Clouds"]
+[node name="cloud7" type="Sprite" parent="BeingCool/Clouds"]
 position = Vector2( 1281.78, 616 )
 texture = ExtResource( 10 )
 
-[node name="cloud2" type="Sprite" parent="Clouds"]
+[node name="cloud2" type="Sprite" parent="BeingCool/Clouds"]
 position = Vector2( 916.845, 981.634 )
 texture = ExtResource( 4 )
 
-[node name="cloud9" type="Sprite" parent="Clouds"]
+[node name="cloud9" type="Sprite" parent="BeingCool/Clouds"]
 position = Vector2( 833.684, 1207.37 )
 texture = ExtResource( 4 )
 
-[node name="cloud12" type="Sprite" parent="Clouds"]
+[node name="cloud12" type="Sprite" parent="BeingCool/Clouds"]
 position = Vector2( 1206.33, 872 )
 texture = ExtResource( 9 )
 
-[node name="cloud13" type="Sprite" parent="Clouds"]
+[node name="cloud13" type="Sprite" parent="BeingCool/Clouds"]
 position = Vector2( 1192.96, 400.478 )
 texture = ExtResource( 13 )
 
-[node name="cloud14" type="Sprite" parent="Clouds"]
+[node name="cloud14" type="Sprite" parent="BeingCool/Clouds"]
 position = Vector2( 1340.57, 803.048 )
 texture = ExtResource( 10 )
 
@@ -283,7 +306,7 @@ scale = Vector2( 1.89794, 1.89794 )
 z_index = 101
 texture = ExtResource( 11 )
 
-[node name="ground" type="Sprite" parent="talkinghead"]
+[node name="banner" type="Sprite" parent="talkinghead"]
 modulate = Color( 0.117647, 0.870588, 1, 0.505882 )
 position = Vector2( 461.553, -56.9038 )
 scale = Vector2( 0.45804, 0.103972 )
@@ -304,9 +327,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Infirmary" parent="." instance=ExtResource( 1 )]
+position = Vector2( 304, 368 )
+
+[node name="Staffcabin" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1344, 464 )
+
 [node name="Phone" parent="." instance=ExtResource( 12 )]
 position = Vector2( 1840, 1352 )
 z_index = 100
 
 [node name="Ambulance" parent="." instance=ExtResource( 15 )]
+position = Vector2( 104, 592 )
+
+[node name="GlobalTimer" type="Timer" parent="."]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_GlobalTimer_timeout"]

@@ -1,17 +1,23 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Assets/Ambulance/ambutemp.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Ambulance/ambulance.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Ambulance/Ambulance.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Ambulance/ambulanceoff.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 144, 104 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "blicking",
+"name": "idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "blinking",
+"speed": 2.0
 } ]
 
 [sub_resource type="Animation" id=3]
@@ -26,7 +32,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -192, 456 ), Vector2( 120, 464 ) ]
+"values": [ Vector2( -192, 592 ), Vector2( 120, 592 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -42,26 +48,24 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 20 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 120, 464 ), Vector2( -192, 464 ), Vector2( -192, 464 ) ]
+"values": [ Vector2( 120, 592 ), Vector2( -192, 592 ), Vector2( -192, 592 ) ]
 }
 
 [node name="Ambulance" type="StaticBody2D"]
 position = Vector2( 120, 464 )
 input_pickable = true
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -16, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 1.52588e-05, 1.52588e-05 )
-scale = Vector2( 0.31, 0.31 )
-frames = SubResource( 1 )
-animation = "blicking"
+position = Vector2( -16, 1.52588e-05 )
+scale = Vector2( 0.652174, 0.652174 )
+frames = SubResource( 2 )
+animation = "idle"
+playing = true
 
 [node name="Arrival" type="AnimationPlayer" parent="."]
 anims/arrival = SubResource( 3 )

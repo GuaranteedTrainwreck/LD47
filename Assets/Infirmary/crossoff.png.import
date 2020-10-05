@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/perso_stuck-09.png-56481b413c494fbb1e2ef522f4cde45e.stex"
+path="res://.import/crossoff.png-f74d0f8b1e3760b56b06f4dd92a345b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hoopers/perso_stuck-09.png"
-dest_files=[ "res://.import/perso_stuck-09.png-56481b413c494fbb1e2ef522f4cde45e.stex" ]
+source_file="res://Assets/Infirmary/crossoff.png"
+dest_files=[ "res://.import/crossoff.png-f74d0f8b1e3760b56b06f4dd92a345b2.stex" ]
 
 [params]
 

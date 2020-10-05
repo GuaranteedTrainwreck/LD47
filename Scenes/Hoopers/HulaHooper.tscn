@@ -1,19 +1,43 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Scripts/Hoopers/HulaHooper.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Hoopers/perso_dancing-02.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Hoopers/perso_dancing-03.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Hoopers/perso_dancing-04.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Hoopers/perso_stuck-08.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Hoopers/perso_stuck-09.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Hoopers/perso_stuck-05.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Hoopers/perso_stuck-07.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Hoopers/perso_stuck-06.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Hoopers/Hooper1/perso_dancing-02.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Hoopers/Hooper1/perso_dancing-03.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Hoopers/Hooper1/perso_dancing-04.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Hoopers/Hooper1/perso_stuck-08.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Hoopers/Hooper1/perso_stuck-09.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Hoopers/Hooper1/perso_stuck-05.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Hoopers/Hooper1/perso_stuck-07.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Hoopers/Hooper1/perso_stuck-06.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Hoopers/Hooper2/perso2_dancing_04.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Hoopers/Hooper2/perso2_stuck-07.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Hoopers/Hooper2/perso2_stuck-06.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Hoopers/Hooper2/perso2_dancing_03.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Hoopers/Hooper2/perso2_stuck-08.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Hoopers/Hooper2/perso2_stuck_05.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Hoopers/Hooper2/perso2_dancing-02.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Hoopers/Hooper2/perso2_stuck-09.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Hoopers/Hooper3/perso3_04.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Hoopers/Hooper3/perso3_stuck-14.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Hoopers/Hooper3/perso3_stuck-15.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Hoopers/Hooper3/perso3_02.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Hoopers/Hooper3/perso3_stuck-11.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Hoopers/Hooper3/perso3_stuck-10.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Hoopers/Hooper3/perso3_stuck-13.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Hoopers/Hooper3/perso3_03.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Hoopers/Hooper4/perso4-24.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Hoopers/Hooper4/perso4_02.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Hoopers/Hooper4/perso4-27.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Hoopers/Hooper4/perso4-25.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Hoopers/Hooper4/perso4_03.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Hoopers/Hooper4/perso4_04.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Hoopers/Hooper4/perso4-23.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Hoopers/Hooper4/perso4-26.png" type="Texture" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 40 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
@@ -26,6 +50,60 @@ animations = [ {
 "speed": 0.4
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "hooping",
+"speed": 6.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "suffocating",
+"speed": 0.4
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "hooping",
+"speed": 6.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 20 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "suffocating",
+"speed": 0.4
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 25 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "hooping",
+"speed": 6.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 28 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 32 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "suffocating",
+"speed": 0.4
+}, {
+"frames": [ ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ],
 "loop": true,
 "name": "hooping",
 "speed": 6.0
@@ -48,9 +126,33 @@ one_shot = true
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="HooperAnim" type="AnimatedSprite" parent="."]
+[node name="Hooper1" type="AnimatedSprite" parent="."]
+visible = false
+scale = Vector2( 0.3, 0.3 )
+frames = SubResource( 2 )
+animation = "hooping"
+frame = 1
+playing = true
+
+[node name="Hooper2" type="AnimatedSprite" parent="."]
+visible = false
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 3 )
+animation = "hooping"
+frame = 2
+playing = true
+
+[node name="Hooper3" type="AnimatedSprite" parent="."]
+visible = false
+scale = Vector2( 0.3, 0.3 )
+frames = SubResource( 4 )
+animation = "hooping"
+playing = true
+
+[node name="Hooper4" type="AnimatedSprite" parent="."]
+visible = false
+scale = Vector2( 0.3, 0.3 )
+frames = SubResource( 5 )
 animation = "hooping"
 frame = 1
 playing = true

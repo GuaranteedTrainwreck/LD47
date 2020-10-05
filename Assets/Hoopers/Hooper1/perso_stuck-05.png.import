@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/perso_dancing-02.png-07a20bca04e0da761b47006e44368213.stex"
+path="res://.import/perso_stuck-05.png-05df57acb418bf65e6d2085b54d3178d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hoopers/perso_dancing-02.png"
-dest_files=[ "res://.import/perso_dancing-02.png-07a20bca04e0da761b47006e44368213.stex" ]
+source_file="res://Assets/Hoopers/Hooper1/perso_stuck-05.png"
+dest_files=[ "res://.import/perso_stuck-05.png-05df57acb418bf65e6d2085b54d3178d.stex" ]
 
 [params]
 
@@ -31,4 +31,4 @@ process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true
-svg/scale=1.0
+svg/scale=0.3
