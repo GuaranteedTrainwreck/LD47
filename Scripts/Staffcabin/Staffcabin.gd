@@ -14,7 +14,7 @@ func _physics_process(delta):
 		$CabinTimer.set_wait_time(1)
 		$CabinTimer.start()
 		beingCool = true
-		if get_parent().healing:
+		if get_parent().infirmaryClicked:
 			get_parent().get_node("Infirmary").ClickInfirmary()
 
 		$AnimationPlayer.play("selected")

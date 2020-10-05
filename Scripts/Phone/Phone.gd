@@ -23,7 +23,7 @@ func _physics_process(delta):
 
 func _on_Phone_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed("player_select") and smsReceived and !get_parent().beingCool:
-		if get_parent().healing:
+		if get_parent().infirmaryClicked:
 			get_parent().get_node("Infirmary").ClickInfirmary()
 		position = Vector2(960, 590)
 		get_parent().beingOnPhone = true

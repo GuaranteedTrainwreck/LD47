@@ -161,7 +161,6 @@ texture = ExtResource( 18 )
 texture = ExtResource( 6 )
 
 [node name="Dancefloor3" type="Sprite" parent="Backgrounds/Dancefloor"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 17 )
 
 [node name="Stats" type="Node2D" parent="."]
@@ -213,17 +212,20 @@ __meta__ = {
 [node name="UGOTFIRED" type="Node2D" parent="."]
 visible = false
 position = Vector2( 408, 224 )
-scale = Vector2( 8, 8 )
 z_index = 200
 
 [node name="ground" type="Sprite" parent="UGOTFIRED"]
-position = Vector2( 75.5, 35.5 )
-scale = Vector2( 0.187333, 0.100667 )
+modulate = Color( 0, 0, 0, 0.592157 )
+position = Vector2( 513.5, 272 )
+scale = Vector2( 0.680667, 0.362667 )
 texture = ExtResource( 5 )
 
 [node name="Fired" type="Label" parent="UGOTFIRED"]
-margin_right = 143.0
-margin_bottom = 82.0
+margin_left = 96.0
+margin_top = 32.0
+margin_right = 237.0
+margin_bottom = 114.0
+rect_scale = Vector2( 6, 6 )
 text = "YOU GOT CANNED !
 
 You did not answer
@@ -237,17 +239,19 @@ __meta__ = {
 [node name="NOTCOOL" type="Node2D" parent="."]
 visible = false
 position = Vector2( 408, 224 )
-scale = Vector2( 8, 8 )
 z_index = 200
 
 [node name="ground" type="Sprite" parent="NOTCOOL"]
-position = Vector2( 75.5, 35.5 )
-scale = Vector2( 0.187333, 0.100667 )
+modulate = Color( 0, 0, 0, 0.576471 )
+position = Vector2( 483.5, 256 )
+scale = Vector2( 0.731333, 0.394667 )
 texture = ExtResource( 5 )
 
 [node name="Suck" type="Label" parent="NOTCOOL"]
-margin_right = 143.0
+margin_left = -32.0
+margin_right = 139.0
 margin_bottom = 82.0
+rect_scale = Vector2( 6, 6 )
 text = "SORRY YOU'RE NOT COOL
 ENOUGH TO STAY !
 

@@ -88,7 +88,6 @@ func _on_DeathTimer_timeout():
 	dead = true
 	get_parent().incidentsTotal -= 1
 	get_parent().deathsTotal += 1
-	set_physics_process(false)
 	get_node(characterName).play("dead")
 
 #	IncidentTimer Signal
