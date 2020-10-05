@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 136, 168 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/outline_width = 0.0
 shader_param/outline_color = Color( 1, 1, 1, 1 )
@@ -41,7 +41,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 4 )
+material = SubResource( 2 )
 position = Vector2( -0.533478, 0.458817 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 3 )

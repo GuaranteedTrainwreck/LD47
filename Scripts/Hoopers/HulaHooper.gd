@@ -13,9 +13,8 @@ var characterId = 1
 var characterName = "Hooper1"
 
 #countdowns
-var toleaving = 0
-var toincident = 0
-var todeath = 10
+export var leavingTimer : float = 10.0
+export var incidentTimer : float = 10.0
 
 #booleans
 var suffocating = false
@@ -35,11 +34,11 @@ func _ready():
 	get_node(characterName).visible = true
 	
 #	init and start leaving countdown
-	$LeavingTimer.set_wait_time(rng.randf_range(5, 20))
+	$LeavingTimer.set_wait_time(rng.randf_range(leavingTimer - 2, leavingTimer + 2))
 	$LeavingTimer.start()
 	
 #	init and start suffocating countdown
-	$IncidentTimer.set_wait_time(rng.randf_range(5, 20))
+	$IncidentTimer.set_wait_time(rng.randf_range(incidentTimer - 5, incidentTimer + 2))
 	$IncidentTimer.start()
 
 #	init death countdown

@@ -52,7 +52,7 @@ tracks/0/keys = {
 }
 
 [node name="Ambulance" type="StaticBody2D"]
-position = Vector2( 120, 464 )
+position = Vector2( 120, 592 )
 input_pickable = true
 script = ExtResource( 2 )
 

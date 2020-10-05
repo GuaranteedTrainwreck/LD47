@@ -114,6 +114,7 @@ tracks/7/keys = {
 [node name="Staffcabin" type="StaticBody2D"]
 input_pickable = true
 script = ExtResource( 2 )
+coolIncrement = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )

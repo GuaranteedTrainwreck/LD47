@@ -128,6 +128,8 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
+spawnInitialRatio = 8.0
+spawnDoubleTime = 120.0
 
 [node name="Backgrounds" type="Node2D" parent="."]
 position = Vector2( 1336, 540.718 )
@@ -144,6 +146,7 @@ scale = Vector2( 1.83182, 0.998673 )
 texture = ExtResource( 7 )
 
 [node name="Sun" type="Sprite" parent="Backgrounds"]
+position = Vector2( 231.086, 0 )
 texture = ExtResource( 8 )
 
 [node name="Dancefloor" type="Node2D" parent="Backgrounds"]
@@ -172,6 +175,17 @@ margin_right = 808.0
 margin_bottom = 35.0
 custom_fonts/font = SubResource( 1 )
 text = "Coolness :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="Stats"]
+margin_left = 1267.5
+margin_top = 3.11666
+margin_right = 1419.5
+margin_bottom = 35.1167
+custom_fonts/font = SubResource( 1 )
+text = "Time Elapsed :"
 __meta__ = {
 "_edit_use_anchors_": false
 }

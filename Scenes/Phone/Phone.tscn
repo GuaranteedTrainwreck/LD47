@@ -7,15 +7,15 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "nosms",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "sms",
 "speed": 1.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "nosms",
+"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=2]

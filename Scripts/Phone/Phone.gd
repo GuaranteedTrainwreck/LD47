@@ -5,10 +5,11 @@ var smsReceived = false
 var beingOnPhone = false
 var typingDone = false
 onready var pos = self.position
+export var smsWaitingTime = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	get_parent().smsUnanswered = smsWaitingTime
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,4 +41,4 @@ func _on_Phone_input_event(_viewport, event, _shape_idx):
 		typingDone = false
 		get_parent().coolness -= 10
 		get_parent().beingOnPhone = false
-		get_parent().smsUnanswered = 20
+		get_parent().smsUnanswered = smsWaitingTime

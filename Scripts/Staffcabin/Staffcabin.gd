@@ -3,6 +3,7 @@ extends StaticBody2D
 
 var targeted = false
 var beingCool = false
+export var coolIncrement = 2
 
 func _ready():
 	pass
@@ -38,4 +39,4 @@ func _on_Staffcabin_mouse_exited():
 	targeted = false
 
 func _on_CabinTimer_timeout():
-	get_parent().coolness += 2
+	get_parent().coolness = clamp(get_parent().coolness + coolIncrement, 0.0, 100.0)
