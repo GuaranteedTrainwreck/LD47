@@ -77,6 +77,7 @@ func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 #	pick up dead body
 	if event.is_action_pressed("player_action") and dead and ambulanceClicked:
 		self.queue_free()
+		get_parent().get_node("Ambulance/AnimatedSprite").get_material().set_shader_param("outline_width", 0)
 		get_parent().deathsTotal -= 1
 		get_parent().ambulanceReady = false
 		get_parent().ambulanceClicked = false

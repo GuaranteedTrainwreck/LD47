@@ -27,6 +27,7 @@ func _on_ambulance_input_event(viewport, event, shape_idx):
 func ClickAmbulance():
 	if get_parent().deathsTotal > 0 and ambulanceReady and !ambulanceClicked:
 		get_parent().ambulanceClicked = true
+		$AnimatedSprite.get_material().set_shader_param("outline_width", 3)
 
 func _on_departure_animation_finished(anim_name):
 	get_parent().ambulanceReady = true

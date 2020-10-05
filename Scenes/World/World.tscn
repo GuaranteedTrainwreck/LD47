@@ -34,10 +34,10 @@
 size = 25
 font_data = ExtResource( 16 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 960, 540 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 13.0
 loop = true
 tracks/0/type = "value"
@@ -137,7 +137,7 @@ tracks/7/keys = {
 "values": [ Vector2( 1464, 800 ), Vector2( 168, 832 ) ]
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 16 )
 
 [node name="World" type="Node2D"]
@@ -145,7 +145,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
-chaosMax = 50.0
 spawnInitialRatio = 8.0
 spawnDoubleTime = 120.0
 
@@ -270,7 +269,7 @@ texture = ExtResource( 21 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UGOTFIRED"]
 position = Vector2( 551, 317 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="NOTCOOL" type="StaticBody2D" parent="."]
 visible = false
@@ -285,12 +284,12 @@ texture = ExtResource( 20 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="NOTCOOL"]
 position = Vector2( 551, 317 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="BeingCool" type="Node2D" parent="."]
 
 [node name="BeingCoolAnim" type="AnimationPlayer" parent="BeingCool"]
-anims/smoke = SubResource( 2 )
+anims/smoke = SubResource( 3 )
 
 [node name="Clouds" type="Node2D" parent="BeingCool"]
 visible = false
@@ -351,7 +350,7 @@ margin_left = 207.262
 margin_top = -131.342
 margin_right = 667.262
 margin_bottom = 3.6575
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "[KYLE]
 
 WOW MAN WE ALL THOUGHT YOU WERE

@@ -43,3 +43,4 @@ func _on_Phone_input_event(_viewport, event, _shape_idx):
 		get_parent().coolness -= 10
 		get_parent().beingOnPhone = false
 		get_parent().smsUnanswered = smsWaitingTime
+		get_parent().chaos = 0

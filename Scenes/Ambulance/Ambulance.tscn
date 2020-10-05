@@ -1,13 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Ambulance/ambulance.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Ambulance/Ambulance.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Ambulance/ambulanceoff.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Shaders/outlineAmbulance.shader" type="Shader" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 144, 104 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_param/outline_width = 0.0
+shader_param/outline_color = Color( 0.909804, 0.486275, 0.486275, 1 )
+
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
@@ -20,8 +26,7 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="Animation" id=3]
-resource_name = "arrival"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -35,8 +40,7 @@ tracks/0/keys = {
 "values": [ Vector2( -192, 592 ), Vector2( 120, 592 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "departure"
+[sub_resource type="Animation" id=5]
 length = 20.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -61,16 +65,17 @@ position = Vector2( -16, 0 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 2 )
 position = Vector2( -16, 1.52588e-05 )
 scale = Vector2( 0.652174, 0.652174 )
-frames = SubResource( 2 )
+frames = SubResource( 3 )
 animation = "idle"
 playing = true
 
 [node name="Arrival" type="AnimationPlayer" parent="."]
-anims/arrival = SubResource( 3 )
+anims/arrival = SubResource( 4 )
 
 [node name="Departure" type="AnimationPlayer" parent="."]
-anims/departure = SubResource( 4 )
+anims/departure = SubResource( 5 )
 [connection signal="input_event" from="." to="." method="_on_ambulance_input_event"]
 [connection signal="animation_finished" from="Departure" to="." method="_on_departure_animation_finished"]
