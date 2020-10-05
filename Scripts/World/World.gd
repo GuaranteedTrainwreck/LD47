@@ -50,7 +50,6 @@ func _ready():
 	
 #	init timer
 	timer.set_wait_time(1)
-	timer.start()
 
 #AT RUNTIME
 func _physics_process(_delta):
