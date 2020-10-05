@@ -50,7 +50,6 @@ func _physics_process(_delta):
 
 #ON CLICK
 func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
-	
 #	heal Hooper
 	if event.is_action_pressed("player_action") and incident and get_parent().healing:
 		$LeavingTimer.set_paused(false)
@@ -61,6 +60,14 @@ func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 		get_parent().incidentsTotal -= 1
 		get_parent().get_node("Infirmary").ClickInfirmary()
 		$HooperAnim.play("hooping")
+		
+#	pick up dead body
+	if event.is_action_pressed("player_action") and dead and get_parent().ambulanceClicked:
+		self.queue_free()
+		get_parent().deathsTotal -= 1
+		get_parent().ambulanceReady = false
+		get_parent().ambulanceClicked = false
+		get_parent().get_node("Ambulance").get_node("Departure").play("departure")
 
 #	DeathTimer Signal
 func _on_DeathTimer_timeout():

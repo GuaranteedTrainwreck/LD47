@@ -15,6 +15,11 @@ func _ready():
 func _physics_process(delta):
 	smsReceived = get_parent().smsReceived
 	beingOnPhone = get_parent().beingOnPhone
+	
+	if smsReceived:
+		$AnimatedSprite.play("sms")
+	else:
+		$AnimatedSprite.play("nosms")
 
 func _on_Phone_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed("player_select") and smsReceived and !get_parent().beingCool:
@@ -30,6 +35,9 @@ func _on_Phone_input_event(_viewport, event, _shape_idx):
 			typingDone = true
 	elif event.is_action_pressed("player_select") and typingDone:
 		$Response.percent_visible = 0
+		$AnimatedSprite.play("nosms")
 		position = pos
 		typingDone = false
+		get_parent().coolness -= 10
 		get_parent().beingOnPhone = false
+		get_parent().smsUnanswered = 20

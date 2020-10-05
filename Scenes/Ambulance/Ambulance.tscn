@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Ambulance/ambutemp.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Ambulance/Ambulance.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 144, 104 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "blicking",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=3]
+resource_name = "arrival"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -192, 456 ), Vector2( 120, 464 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "departure"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 20 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 120, 464 ), Vector2( -192, 464 ), Vector2( -192, 464 ) ]
+}
+
+[node name="Ambulance" type="StaticBody2D"]
+position = Vector2( 120, 464 )
+input_pickable = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -16, 0 )
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 1.52588e-05, 1.52588e-05 )
+scale = Vector2( 0.31, 0.31 )
+frames = SubResource( 1 )
+animation = "blicking"
+
+[node name="Arrival" type="AnimationPlayer" parent="."]
+anims/arrival = SubResource( 3 )
+
+[node name="Departure" type="AnimationPlayer" parent="."]
+anims/departure = SubResource( 4 )
+[connection signal="input_event" from="." to="." method="_on_ambulance_input_event"]
+[connection signal="animation_finished" from="Departure" to="." method="_on_departure_animation_finished"]

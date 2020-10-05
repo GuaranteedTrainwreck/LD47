@@ -6,7 +6,7 @@ const HOOL = preload("res://Scenes/Hoopers/HulaHooper.tscn")
 # countdown/up variables
 var deathsTotal = 0
 var incidentsTotal = 0
-var coolness = 50
+var coolness = 100
 var chaos = 0
 var coolnessSubFactor = 1
 export var spawnRate = 3
@@ -15,7 +15,13 @@ export var spawnRate = 3
 var beingOnPhone = false
 var beingCool = false
 var healing = false
-var smsReceived = true
+var smsReceived = false
+var ambulanceReady = true
+var ambulanceClicked = false
+
+#endgame timers
+var smsUnanswered = 20
+
 #get timer
 onready var timer = get_node("GlobalTimer")
 
@@ -50,6 +56,20 @@ func _on_GlobalTimer_timeout():
 	if get_node("Staffcabin").beingCool == false:
 		coolness -= coolnessSubFactor
 	
-
+#	if chaos limit reached
+	if chaos >= 10 and !beingOnPhone:
+		smsReceived = true
+	
+#	start countdown to getting fired
+	if smsReceived:
+		smsUnanswered -= 1
+		
+#	display you-got-fired message
+	if smsUnanswered == 0:
+		$UGOTFIRED.visible = true
+	
+#	display not-cool message
+	if coolness <= 0:
+		$NOTCOOL.visible = true
 	
 	
