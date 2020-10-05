@@ -1,16 +1,16 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scenes/Infirmary/Infirmary.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Staffcabin/Staffcabin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/BeingCool/cloud2.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Background/ground.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Background/sand.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Background/dancefloor2.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Background/sky.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Background/sun.png" type="Texture" id=8]
 [ext_resource path="res://Assets/BeingCool/cloud5.png" type="Texture" id=9]
 [ext_resource path="res://Assets/BeingCool/cloud7.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Hoopers/Hooper1/hoopersTemp.png" type="Texture" id=11]
+[ext_resource path="res://Assets/BeingCool/talkinghead.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Phone/Phone.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/BeingCool/cloud6.png" type="Texture" id=13]
 [ext_resource path="res://Assets/BeingCool/cloud3.png" type="Texture" id=14]
@@ -19,10 +19,23 @@
 [ext_resource path="res://Assets/Background/dancefloor3.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Background/dancefloor1.png" type="Texture" id=18]
 [ext_resource path="res://Scenes/Tuto/Tuto.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/EndScreens/notcool.png" type="Texture" id=20]
+[ext_resource path="res://Assets/EndScreens/gotfired.png" type="Texture" id=21]
+[ext_resource path="res://Assets/BeingCool/banner.png" type="Texture" id=22]
+[ext_resource path="res://Assets/StaffCabin/cloud2.png" type="Texture" id=23]
+[ext_resource path="res://Assets/StaffCabin/cloud1.png" type="Texture" id=24]
+[ext_resource path="res://Assets/StaffCabin/cloud3.png" type="Texture" id=25]
+[ext_resource path="res://Scripts/EndScreens/godFired.gd" type="Script" id=26]
+[ext_resource path="res://Scripts/EndScreens/notcool.gd" type="Script" id=27]
+[ext_resource path="res://Assets/Sounds/seaAmbient-converted.ogg" type="AudioStream" id=28]
+[ext_resource path="res://Scenes/World/AudioStreamPlayer.gd" type="Script" id=29]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
 font_data = ExtResource( 16 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 960, 540 )
 
 [sub_resource type="Animation" id=2]
 length = 13.0
@@ -124,11 +137,15 @@ tracks/7/keys = {
 "values": [ Vector2( 1464, 800 ), Vector2( 168, 832 ) ]
 }
 
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 16 )
+
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
+chaosMax = 50.0
 spawnInitialRatio = 8.0
 spawnDoubleTime = 120.0
 
@@ -137,13 +154,14 @@ position = Vector2( 1336, 540.718 )
 scale = Vector2( 0.698667, 0.720957 )
 
 [node name="Sand" type="Sprite" parent="Backgrounds"]
+modulate = Color( 1, 0.917647, 0.772549, 1 )
 position = Vector2( -538.168, -0.995911 )
 scale = Vector2( 1.83206, 0.998673 )
 texture = ExtResource( 5 )
 
 [node name="Sky" type="Sprite" parent="Backgrounds"]
-position = Vector2( -537.989, -0.995911 )
-scale = Vector2( 1.83182, 0.998673 )
+position = Vector2( -537.989, -472.591 )
+scale = Vector2( 1.83182, 0.369879 )
 texture = ExtResource( 7 )
 
 [node name="Sun" type="Sprite" parent="Backgrounds"]
@@ -151,7 +169,7 @@ position = Vector2( 231.086, 0 )
 texture = ExtResource( 8 )
 
 [node name="Dancefloor" type="Node2D" parent="Backgrounds"]
-modulate = Color( 1, 1, 1, 0.607843 )
+modulate = Color( 1, 1, 1, 0.823529 )
 position = Vector2( -538.168, -62.0259 )
 scale = Vector2( 1.5, 1.5 )
 __meta__ = {
@@ -166,6 +184,21 @@ texture = ExtResource( 6 )
 
 [node name="Dancefloor3" type="Sprite" parent="Backgrounds/Dancefloor"]
 texture = ExtResource( 17 )
+
+[node name="cloud1" type="Sprite" parent="Backgrounds"]
+position = Vector2( -137.405, 48.9377 )
+scale = Vector2( 1.4313, 1.38705 )
+texture = ExtResource( 24 )
+
+[node name="cloud2" type="Sprite" parent="Backgrounds"]
+position = Vector2( -1328.24, -128.604 )
+scale = Vector2( 1.4313, 1.38705 )
+texture = ExtResource( 23 )
+
+[node name="cloud3" type="Sprite" parent="Backgrounds"]
+position = Vector2( -790.076, -84.2186 )
+scale = Vector2( 1.4313, 1.38705 )
+texture = ExtResource( 25 )
 
 [node name="Stats" type="Node2D" parent="."]
 
@@ -208,7 +241,7 @@ margin_top = 3.0
 margin_right = 458.0
 margin_bottom = 35.0
 custom_fonts/font = SubResource( 1 )
-text = "Incidents :"
+text = "Choking :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -224,58 +257,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UGOTFIRED" type="Node2D" parent="."]
+[node name="UGOTFIRED" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2( 408, 224 )
 z_index = 200
+input_pickable = true
+script = ExtResource( 26 )
 
-[node name="ground" type="Sprite" parent="UGOTFIRED"]
-modulate = Color( 0, 0, 0, 0.592157 )
-position = Vector2( 513.5, 272 )
-scale = Vector2( 0.680667, 0.362667 )
-texture = ExtResource( 5 )
+[node name="gotfired" type="Sprite" parent="UGOTFIRED"]
+position = Vector2( 552, 312 )
+texture = ExtResource( 21 )
 
-[node name="Fired" type="Label" parent="UGOTFIRED"]
-margin_left = 96.0
-margin_top = 32.0
-margin_right = 237.0
-margin_bottom = 114.0
-rect_scale = Vector2( 6, 6 )
-text = "YOU GOT CANNED !
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UGOTFIRED"]
+position = Vector2( 551, 317 )
+shape = SubResource( 4 )
 
-You did not answer
-your Boss's messages
-so he fired your ass."
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NOTCOOL" type="Node2D" parent="."]
+[node name="NOTCOOL" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2( 408, 224 )
 z_index = 200
+input_pickable = true
+script = ExtResource( 27 )
 
-[node name="ground" type="Sprite" parent="NOTCOOL"]
-modulate = Color( 0, 0, 0, 0.576471 )
-position = Vector2( 483.5, 256 )
-scale = Vector2( 0.731333, 0.394667 )
-texture = ExtResource( 5 )
+[node name="notcool" type="Sprite" parent="NOTCOOL"]
+position = Vector2( 552, 319 )
+texture = ExtResource( 20 )
 
-[node name="Suck" type="Label" parent="NOTCOOL"]
-margin_left = -32.0
-margin_right = 139.0
-margin_bottom = 82.0
-rect_scale = Vector2( 6, 6 )
-text = "SORRY YOU'RE NOT COOL
-ENOUGH TO STAY !
-
-Next time try and hang out
-with the cool kids."
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="NOTCOOL"]
+position = Vector2( 551, 317 )
+shape = SubResource( 4 )
 
 [node name="BeingCool" type="Node2D" parent="."]
 
@@ -318,39 +328,45 @@ texture = ExtResource( 13 )
 position = Vector2( 1340.57, 803.048 )
 texture = ExtResource( 10 )
 
-[node name="talkinghead" type="Sprite" parent="."]
+[node name="TalkingHead" type="Node2D" parent="."]
 visible = false
 position = Vector2( 168, 936 )
 scale = Vector2( 1.89794, 1.89794 )
 z_index = 101
+
+[node name="talkingheadd" type="Sprite" parent="TalkingHead"]
+position = Vector2( 54.7962, -37.9359 )
+scale = Vector2( 0.7, 0.7 )
+z_index = 101
 texture = ExtResource( 11 )
 
-[node name="banner" type="Sprite" parent="talkinghead"]
-modulate = Color( 0.117647, 0.870588, 1, 0.505882 )
-position = Vector2( 461.553, -56.9038 )
-scale = Vector2( 0.45804, 0.103972 )
-texture = ExtResource( 5 )
+[node name="banner" type="Sprite" parent="TalkingHead"]
+position = Vector2( 464.383, -76.5462 )
+scale = Vector2( 0.608495, 0.598945 )
+texture = ExtResource( 22 )
 
-[node name="talktest" type="Label" parent="talkinghead"]
+[node name="talktest" type="Label" parent="TalkingHead"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 156.0
-margin_top = -122.0
-margin_right = 476.0
-margin_bottom = -57.0
-rect_scale = Vector2( 2, 2 )
-text = "\" WOW MAN WE ALL THOUGHT YOU WERE
+margin_left = 207.262
+margin_top = -131.342
+margin_right = 667.262
+margin_bottom = 3.6575
+custom_fonts/font = SubResource( 3 )
+text = "[KYLE]
+
+WOW MAN WE ALL THOUGHT YOU WERE
 A TOTAL NERD BUT HERE YOU ARE BEING COOL ! 
 
-SO RAD ! \""
+SO RAD !"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Infirmary" parent="." instance=ExtResource( 1 )]
-position = Vector2( 494.818, 368 )
+position = Vector2( 472, 352 )
 
 [node name="Staffcabin" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1344, 464 )
+position = Vector2( 1288, 440 )
 
 [node name="Phone" parent="." instance=ExtResource( 12 )]
 position = Vector2( 1840, 1352 )
@@ -362,4 +378,13 @@ position = Vector2( 104, 592 )
 [node name="GlobalTimer" type="Timer" parent="."]
 
 [node name="Tuto" parent="." instance=ExtResource( 19 )]
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 28 )
+script = ExtResource( 29 )
+[connection signal="input_event" from="UGOTFIRED" to="UGOTFIRED" method="_on_UGOTFIRED_input_event"]
+[connection signal="input_event" from="NOTCOOL" to="NOTCOOL" method="_on_NOTCOOL_input_event"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_GlobalTimer_timeout"]
+[connection signal="finished" from="Sound/AudioStreamPlayer" to="Sound/AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]

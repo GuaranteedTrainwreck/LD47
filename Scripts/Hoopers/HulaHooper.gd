@@ -70,6 +70,7 @@ func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 		suffocating = false
 		get_parent().infirmaryClicked = false
 		get_parent().incidentsTotal -= 1
+		get_parent().chaos -= 2
 		get_parent().get_node("Infirmary/AnimatedSprite").get_material().set_shader_param("outline_width", 0)
 		get_node(characterName).play("hooping")
 		

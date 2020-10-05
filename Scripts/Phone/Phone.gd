@@ -11,7 +11,6 @@ export var smsWaitingTime = 20
 func _ready():
 	get_parent().smsUnanswered = smsWaitingTime
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	smsReceived = get_parent().smsReceived
@@ -30,11 +29,13 @@ func _on_Phone_input_event(_viewport, event, _shape_idx):
 		get_parent().beingOnPhone = true
 		get_parent().smsReceived = false
 	elif event.is_action_pressed("player_action") and beingOnPhone:
+		$Bip.play()
 		var step : float = 1.0 / $Response.text.length()
 		$Response.percent_visible += step
 		if $Response.percent_visible >= 1:
 			typingDone = true
 	elif event.is_action_pressed("player_select") and typingDone:
+		$Bip.play()
 		$Response.percent_visible = 0
 		$AnimatedSprite.play("nosms")
 		position = pos

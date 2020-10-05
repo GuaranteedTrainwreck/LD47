@@ -57,7 +57,7 @@ func _physics_process(_delta):
 
 #	UI changes
 	get_node("Stats/Deaths").text = "Deaths : " + str(deathsTotal)
-	get_node("Stats/Incidents").text = "Incidents : " + str(incidentsTotal)
+	get_node("Stats/Incidents").text = "Choking : " + str(incidentsTotal)
 	get_node("Stats/Coolness").text = "Coolness : " + str(coolness) + "/" + str(coolnessMax)
 	get_node("Stats/Chaos").text = "Chaos : " + str(chaos) + "/" + str(chaosMax)
 	get_node("Stats/Time").text = "Time : " + str(timeElapsed)
@@ -84,7 +84,9 @@ func _on_GlobalTimer_timeout():
 	
 #	if chaos limit reached
 	if chaos >= chaosMax and !beingOnPhone:
-		smsReceived = true
+		if !smsReceived:
+			$Phone/Vibrate.play()	
+			smsReceived = true
 	
 #	start countdown to getting fired
 	if smsReceived:
@@ -94,11 +96,13 @@ func _on_GlobalTimer_timeout():
 	if smsUnanswered <= 0 and !gameover:
 		$UGOTFIRED.visible = true
 		gameover = true
+		$GlobalTimer.stop()
 	
 #	display not-cool message
 	if coolness <= 0 and !gameover:
 		$NOTCOOL.visible = true
 		gameover = true
+		$GlobalTimer.stop()		
 	
 #	dancefloor change colors
 	if timeElapsed % 2 == 0:

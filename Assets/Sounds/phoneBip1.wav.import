@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/phoneBip1.wav-7e56abd1ef829e19f10746b3f2e39382.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/phoneBip1.wav"
+dest_files=[ "res://.import/phoneBip1.wav-7e56abd1ef829e19f10746b3f2e39382.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

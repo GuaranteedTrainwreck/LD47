@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends AudioStreamPlayer
 
 
 # Declare member variables here. Examples:
@@ -8,14 +8,13 @@ extends StaticBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	self.play(0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
-func _on_Tuto_input_event(_viewport, event, _shape_idx):
-	if event.is_action_pressed("player_action") or event.is_action_pressed("player_select"):
-		get_parent().timer.start()
-		self.queue_free()
+
+func _on_AudioStreamPlayer_finished():
+	self.play(0)

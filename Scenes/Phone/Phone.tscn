@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Fonts/nokiafc22.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Phone/Phone.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Phone/mobileNoSms.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Phone/mobileSms.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sounds/phonevibrate.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Sounds/phoneBip2.wav" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Sounds/phoneBip1.wav" type="AudioStream" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -38,10 +41,10 @@ frames = SubResource( 1 )
 animation = "nosms"
 
 [node name="Sms" type="Label" parent="."]
-margin_left = -168.0
-margin_top = -264.0
-margin_right = -13.0
-margin_bottom = -233.0
+margin_left = -161.0
+margin_top = -232.0
+margin_right = 93.0
+margin_bottom = -151.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.145098, 0.494118, 0.313726, 1 )
 text = "Hey ! The infirmary
@@ -51,11 +54,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Boss" type="Label" parent="."]
+margin_left = -163.0
+margin_top = -264.0
+margin_right = 91.0
+margin_bottom = -183.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.145098, 0.494118, 0.313726, 1 )
+text = "[BOSS]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Me" type="Label" parent="."]
+margin_left = -109.0
+margin_top = -116.0
+margin_right = 145.0
+margin_bottom = -35.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.145098, 0.494118, 0.313726, 1 )
+text = "[ME]"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Response" type="Label" parent="."]
-margin_left = -24.0
-margin_top = -104.0
-margin_right = 148.0
-margin_bottom = -51.0
+margin_left = -29.0
+margin_top = -89.0
+margin_right = 143.0
+margin_bottom = -36.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.145098, 0.494118, 0.313726, 1 )
 text = "Everything is
@@ -65,4 +93,13 @@ percent_visible = 0.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Vibrate" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Bip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Validate" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 [connection signal="input_event" from="." to="." method="_on_Phone_input_event"]
