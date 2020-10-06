@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scenes/Infirmary/Infirmary.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://Scripts/EndScreens/notcool.gd" type="Script" id=27]
 [ext_resource path="res://Assets/Sounds/seaAmbient-converted.ogg" type="AudioStream" id=28]
 [ext_resource path="res://Scenes/World/AudioStreamPlayer.gd" type="Script" id=29]
+[ext_resource path="res://Assets/Background/signlogo.png" type="Texture" id=30]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -198,6 +199,11 @@ texture = ExtResource( 23 )
 position = Vector2( -790.076, -84.2186 )
 scale = Vector2( 1.4313, 1.38705 )
 texture = ExtResource( 25 )
+
+[node name="signlogo" type="Sprite" parent="Backgrounds"]
+position = Vector2( -652.672, -306.146 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 30 )
 
 [node name="Stats" type="Node2D" parent="."]
 
@@ -376,13 +382,15 @@ position = Vector2( 104, 592 )
 
 [node name="GlobalTimer" type="Timer" parent="."]
 
-[node name="Tuto" parent="." instance=ExtResource( 19 )]
-
 [node name="Sound" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource( 28 )
 script = ExtResource( 29 )
+
+[node name="Tuto" parent="." instance=ExtResource( 19 )]
+position = Vector2( 0, -4 )
+z_index = 400
 [connection signal="input_event" from="UGOTFIRED" to="UGOTFIRED" method="_on_UGOTFIRED_input_event"]
 [connection signal="input_event" from="NOTCOOL" to="NOTCOOL" method="_on_NOTCOOL_input_event"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_GlobalTimer_timeout"]

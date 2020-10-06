@@ -35,7 +35,7 @@ func _on_Phone_input_event(_viewport, event, _shape_idx):
 		if $Response.percent_visible >= 1:
 			typingDone = true
 	elif event.is_action_pressed("player_select") and typingDone:
-		$Bip.play()
+		$Validate.play()
 		$Response.percent_visible = 0
 		$AnimatedSprite.play("nosms")
 		position = pos

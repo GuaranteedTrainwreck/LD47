@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="LD47"
+config/name="Trouble in Hoops Paradise"
 run/main_scene="res://Scenes/World/World.tscn"
 config/icon="res://icon.png"
 
