@@ -10,7 +10,16 @@ func _ready():
 
 func _physics_process(delta):
 	beingCool = get_parent().beingCool
-
+	
+	if get_parent().coolness < 30:
+		get_parent().medicsMax = 1
+	if get_parent().coolness >= 30:
+		get_parent().medicsMax = 2
+	if get_parent().coolness >= 60:
+		get_parent().medicsMax = 3
+	if get_parent().coolness >= 90:
+		get_parent().medicsMax = 4
+			
 	if Input.is_action_just_pressed("player_select") and !beingCool and !get_parent().beingOnPhone and targeted:
 		$CabinTimer.set_wait_time(1)
 		$CabinTimer.start()
@@ -41,4 +50,4 @@ func _on_Staffcabin_mouse_exited():
 	targeted = false
 
 func _on_CabinTimer_timeout():
-	get_parent().coolness = clamp(get_parent().coolness + coolIncrement, 0.0, 100.0)
+	get_parent().coolness = clamp(get_parent().coolness + coolIncrement, 0, 100)

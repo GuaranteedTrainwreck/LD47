@@ -9,18 +9,13 @@ const YMAX = 1000
 #create random
 var rng = RandomNumberGenerator.new()
 
+#new hooper ID
 var characterId = 1
 var characterName = "Hooper1"
-
-#countdowns
-export var leavingTimer : float = 10.0
-export var incidentTimer : float = 10.0
 
 #booleans
 var suffocating = false
 var dead = false
-var infirmaryClicked = false
-var ambulanceClicked = false
 
 # AT START
 func _ready():
@@ -33,17 +28,16 @@ func _ready():
 	characterName = "Hooper" + str(characterId)
 	get_node(characterName).visible = true
 	
-#	init and start leaving countdown
-	$LeavingTimer.set_wait_time(rng.randf_range(leavingTimer - 2, leavingTimer + 2))
+#	init and start countdown to leaving
+	$LeavingTimer.set_wait_time(rng.randf_range(get_parent().leavingRange[0], get_parent().leavingRange[1]))
 	$LeavingTimer.start()
 	
-#	init and start suffocating countdown
-	$IncidentTimer.set_wait_time(rng.randf_range(incidentTimer - 5, incidentTimer + 2))
+#	init and start countdown to choking
+	$IncidentTimer.set_wait_time(rng.randf_range(get_parent().incidentRange[0], get_parent().incidentRange[1]))
 	$IncidentTimer.start()
 
-#	init death countdown
+#	init countdown to death
 	$DeathTimer.set_wait_time(10)
-	
 	
 #	fix spawn limits
 	var x = rng.randf_range(XMIN, XMAX)
@@ -56,42 +50,68 @@ func _ready():
 
 #AT RUNTIME
 func _physics_process(_delta):
-	infirmaryClicked = get_parent().infirmaryClicked
-	ambulanceClicked = get_parent().ambulanceClicked
+	pass
 
-#ON CLICK
+#ON LEFT CLICK
 func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 #	heal Hooper
-	if event.is_action_pressed("player_action") and suffocating and infirmaryClicked:
+	if event.is_action_pressed("player_select") and suffocating and get_parent().infirmaryClicked:
+#		reset timers
 		$LeavingTimer.set_paused(false)
 		$DeathTimer.stop()
-		$IncidentTimer.set_wait_time(rng.randf_range(5, 20))
+		$IncidentTimer.set_wait_time(rng.randf_range(get_parent().leavingRange[0], get_parent().leavingRange[1]))
 		$IncidentTimer.start()
+		
+#		reset booleans
 		suffocating = false
-		get_parent().infirmaryClicked = false
+		
+#		change global values
 		get_parent().incidentsTotal -= 1
-		get_parent().chaos -= 2
-		get_parent().get_node("Infirmary/AnimatedSprite").get_material().set_shader_param("outline_width", 0)
+		get_parent().chaos -= 1
+		get_parent().onDuty -= 1
+		
+#		reset animation
 		get_node(characterName).play("hooping")
 		
-#	pick up dead body
-	if event.is_action_pressed("player_action") and dead and ambulanceClicked:
+#		play sound
+		$heal.play()
+		
+#		cancel click
+		if get_parent().onDuty == 0 or get_parent().incidentsTotal == 0:
+			Input.set_custom_mouse_cursor(null)
+			get_parent().infirmaryClicked = false
+			get_parent().get_node("Infirmary/AnimatedSprite").get_material().set_shader_param("outline_width", 0)
+		
+#	remove dead body
+	if event.is_action_pressed("player_select") and dead and get_parent().ambulanceClicked:
+	#	play sound
+		get_parent().get_node("remove").play()
+		
+	#	remove entity
 		self.queue_free()
+		
+#		change global values
 		get_parent().get_node("Ambulance/AnimatedSprite").get_material().set_shader_param("outline_width", 0)
 		get_parent().deathsTotal -= 1
-		get_parent().ambulanceReady = false
-		get_parent().ambulanceClicked = false
-		get_parent().get_node("Ambulance").get_node("Departure").play("departure")
+		get_parent().inAmbu += 1
+		
+#		cancel click / finish action
+		if get_parent().inAmbu >= get_parent().ambuMax or get_parent().deathsTotal == 0:
+			Input.set_custom_mouse_cursor(null)
+			get_parent().ambulanceReady = false
+			get_parent().ambulanceClicked = false
+			get_parent().get_node("Ambulance").get_node("Departure").play("departure")
 
-#	DeathTimer Signal
+#	death
 func _on_DeathTimer_timeout():
 	suffocating = false
 	dead = true
+	get_parent().inAmbu = 0
 	get_parent().incidentsTotal -= 1
 	get_parent().deathsTotal += 1
 	get_node(characterName).play("dead")
 
-#	IncidentTimer Signal
+#	incident
 func _on_IncidentTimer_timeout():
 	$LeavingTimer.set_paused(true)
 	suffocating = true
@@ -99,6 +119,8 @@ func _on_IncidentTimer_timeout():
 	get_node(characterName).play("suffocating")
 	$DeathTimer.start()
 
-#	LeavingTimer Signal
+#	leaving
 func _on_LeavingTimer_timeout():
+	if suffocating:
+		get_parent().incidentsTotal -= 1
 	self.queue_free()

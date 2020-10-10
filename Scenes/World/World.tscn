@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/Infirmary/Infirmary.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://Assets/Sounds/seaAmbient-converted.ogg" type="AudioStream" id=28]
 [ext_resource path="res://Scenes/World/AudioStreamPlayer.gd" type="Script" id=29]
 [ext_resource path="res://Assets/Background/signlogo.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Sounds/dump.wav" type="AudioStream" id=31]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -146,8 +147,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
-spawnInitialRatio = 8.0
-spawnDoubleTime = 120.0
 
 [node name="Backgrounds" type="Node2D" parent="."]
 position = Vector2( 1336, 540.718 )
@@ -208,9 +207,9 @@ texture = ExtResource( 30 )
 [node name="Stats" type="Node2D" parent="."]
 
 [node name="Coolness" type="Label" parent="Stats"]
-margin_left = 656.0
+margin_left = 515.0
 margin_top = 3.0
-margin_right = 808.0
+margin_right = 667.0
 margin_bottom = 35.0
 custom_fonts/font = SubResource( 1 )
 text = "Coolness :"
@@ -241,9 +240,9 @@ __meta__ = {
 }
 
 [node name="Incidents" type="Label" parent="Stats"]
-margin_left = 304.0
+margin_left = 231.0
 margin_top = 3.0
-margin_right = 458.0
+margin_right = 385.0
 margin_bottom = 35.0
 custom_fonts/font = SubResource( 1 )
 text = "Choking :"
@@ -252,12 +251,12 @@ __meta__ = {
 }
 
 [node name="Chaos" type="Label" parent="Stats"]
-margin_left = 1008.0
+margin_left = 857.0
 margin_top = 3.0
-margin_right = 1117.0
+margin_right = 1063.0
 margin_bottom = 35.0
 custom_fonts/font = SubResource( 1 )
-text = "Chaos :"
+text = "Missed texts :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -391,6 +390,10 @@ script = ExtResource( 29 )
 [node name="Tuto" parent="." instance=ExtResource( 19 )]
 position = Vector2( 0, -4 )
 z_index = 400
+
+[node name="remove" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 31 )
+volume_db = -9.342
 [connection signal="input_event" from="UGOTFIRED" to="UGOTFIRED" method="_on_UGOTFIRED_input_event"]
 [connection signal="input_event" from="NOTCOOL" to="NOTCOOL" method="_on_NOTCOOL_input_event"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_GlobalTimer_timeout"]
