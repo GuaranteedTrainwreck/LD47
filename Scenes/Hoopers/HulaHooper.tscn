@@ -48,7 +48,7 @@ animations = [ {
 "frames": [ ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 5 ) ],
 "loop": false,
 "name": "suffocating",
-"speed": 0.4
+"speed": 0.6
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
@@ -66,7 +66,7 @@ animations = [ {
 "frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "suffocating",
-"speed": 0.4
+"speed": 0.6
 }, {
 "frames": [ ExtResource( 17 ) ],
 "loop": true,
@@ -84,7 +84,7 @@ animations = [ {
 "frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 19 ) ],
 "loop": true,
 "name": "suffocating",
-"speed": 0.4
+"speed": 0.6
 }, {
 "frames": [ ExtResource( 20 ) ],
 "loop": true,
@@ -102,7 +102,7 @@ animations = [ {
 "frames": [ ExtResource( 32 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 33 ) ],
 "loop": true,
 "name": "suffocating",
-"speed": 0.4
+"speed": 0.6
 }, {
 "frames": [ ExtResource( 28 ) ],
 "loop": true,
@@ -112,6 +112,7 @@ animations = [ {
 
 [node name="HulaHooper" type="StaticBody2D"]
 position = Vector2( 432, 480 )
+scale = Vector2( 1.4, 1.4 )
 input_pickable = true
 script = ExtResource( 1 )
 
@@ -132,7 +133,6 @@ visible = false
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 2 )
 animation = "hooping"
-frame = 1
 playing = true
 
 [node name="Hooper2" type="AnimatedSprite" parent="."]
@@ -140,7 +140,6 @@ visible = false
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 3 )
 animation = "hooping"
-frame = 2
 playing = true
 
 [node name="Hooper3" type="AnimatedSprite" parent="."]
@@ -148,6 +147,7 @@ visible = false
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 4 )
 animation = "hooping"
+frame = 1
 playing = true
 
 [node name="Hooper4" type="AnimatedSprite" parent="."]
@@ -155,7 +155,7 @@ visible = false
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 5 )
 animation = "hooping"
-frame = 1
+frame = 2
 playing = true
 
 [node name="heal" type="AudioStreamPlayer" parent="."]

@@ -19,7 +19,7 @@ var spawnCountdown = 2
 var chaosMax = 8
 var coolnessMax = 100
 var coolnessSubFactor = 1
-var spawnRate = 2
+var spawnRate = 3
 var leavingRange = [8, 10]
 var incidentRange = [4, leavingRange[1]]
 
@@ -34,6 +34,7 @@ var infirmaryClicked = false
 var smsReceived = false
 var ambulanceReady = true
 var ambulanceClicked = false
+var talkingHeadEnded = false
 
 #infirmary variables
 var onDuty = 0
@@ -59,6 +60,8 @@ func _ready():
 	
 #	init timer
 	timer.set_wait_time(1)
+
+
 
 #AT RUNTIME
 func _physics_process(_delta):
@@ -92,7 +95,7 @@ func _on_GlobalTimer_timeout():
 		coolness = clamp(coolness - coolnessSubFactor, 0, 100)
 	
 #	if chaos limit reached
-	if deathsTotal >= 2 and !beingOnPhone and timeElapsed % 10 == 0:
+	if deathsTotal >= 2 and !beingOnPhone and timeElapsed % 15 == 0:
 		if !smsReceived:
 			$Phone/Vibrate.play()	
 			smsReceived = true
@@ -106,6 +109,9 @@ func _on_GlobalTimer_timeout():
 	if timeElapsed % 60 == 0:
 		leavingRange[0] += 5
 		leavingRange[1] += 5
+	if timeElapsed % 90 == 0 and spawnRate > 0:
+		spawnRate -= 1
+		
 	
 #	start countdown to getting fired
 	if smsReceived:
@@ -136,3 +142,7 @@ func _on_GlobalTimer_timeout():
 		$Backgrounds/Dancefloor/Dancefloor1.modulate = danceColors[color1]
 		$Backgrounds/Dancefloor/Dancefloor2.modulate = danceColors[color2]
 		$Backgrounds/Dancefloor/Dancefloor3.modulate = danceColors[color3]
+
+
+func _on_banneranim_animation_finished(anim_name):
+	talkingHeadEnded = true

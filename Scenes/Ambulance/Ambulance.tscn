@@ -38,7 +38,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -192, 592 ), Vector2( 120, 592 ) ]
+"values": [ Vector2( -192, 592 ), Vector2( 70, 604 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -53,11 +53,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 20 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 120, 592 ), Vector2( -192, 592 ), Vector2( -192, 592 ) ]
+"values": [ Vector2( 70, 604 ), Vector2( -192, 592 ), Vector2( -192, 592 ) ]
 }
 
 [node name="Ambulance" type="StaticBody2D"]
 position = Vector2( 120, 592 )
+scale = Vector2( 1.4, 1.4 )
 input_pickable = true
 script = ExtResource( 2 )
 

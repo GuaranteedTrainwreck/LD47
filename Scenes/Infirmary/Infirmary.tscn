@@ -29,7 +29,7 @@ animations = [ {
 } ]
 
 [node name="Infirmary" type="StaticBody2D"]
-scale = Vector2( 1.2, 1.2 )
+scale = Vector2( 1.4, 1.4 )
 input_pickable = true
 script = ExtResource( 2 )
 

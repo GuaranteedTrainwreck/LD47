@@ -37,7 +37,7 @@ func _ready():
 	$IncidentTimer.start()
 
 #	init countdown to death
-	$DeathTimer.set_wait_time(10)
+	$DeathTimer.set_wait_time(6)
 	
 #	fix spawn limits
 	var x = rng.randf_range(XMIN, XMAX)
