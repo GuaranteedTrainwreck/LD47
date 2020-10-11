@@ -44,5 +44,6 @@ func _on_Phone_input_event(_viewport, event, _shape_idx):
 			get_parent().coolness -= 10
 			get_parent().beingOnPhone = false
 			get_parent().smsUnanswered = smsWaitingTime
-			get_parent().ambuMax += 1
-#			get_parent().chaos = 0
+			if get_parent().bossHelp:
+				get_parent().ambuMax += 1
+				get_parent().get_node("Staffcabin").powerUp("+1 ambulance space !")

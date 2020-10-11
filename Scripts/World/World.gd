@@ -23,6 +23,12 @@ var spawnRate = 3
 var leavingRange = [8, 10]
 var incidentRange = [4, leavingRange[1]]
 
+#boss texting stuff
+var SmsBoss1 = "Hey kid ! How are\nthings over there ?\nAnother day another\ndollar hey !?"
+var SmsBoss2 = "Hey kid ! Kyle mixed up\nthe latest hoops order,\nso careful, they might\nbe a bit small.."
+var SmsBoss3 = "Hey kid ! If that dick\nfrom Palms News calls,\ntell him to go fuck\nhimself. Cheers !"
+var SmsBoss4 = "Hey kid ! Hope the staff\nis helping you a bit,\ninstead of jerking\neach other off.."
+var bossTexts = [SmsBoss1, SmsBoss2, SmsBoss3, SmsBoss4]
 #create random
 var rng = RandomNumberGenerator.new()
 
@@ -35,6 +41,7 @@ var smsReceived = false
 var ambulanceReady = true
 var ambulanceClicked = false
 var talkingHeadEnded = false
+var bossHelp = false
 
 #infirmary variables
 var onDuty = 0
@@ -91,19 +98,23 @@ func _on_GlobalTimer_timeout():
 	spawnCountdown -= 1
 	timeElapsed += 1
 	chaos = clamp(deathsTotal + incidentsTotal, 0, chaosMax)
-	if get_node("Staffcabin").beingCool == false:
+	if get_node("Staffcabin").beingCool == false and timeElapsed % 3 == 0:
 		coolness = clamp(coolness - coolnessSubFactor, 0, 100)
 	
 #	if chaos limit reached
 	if deathsTotal >= 2 and !beingOnPhone and timeElapsed % 15 == 0:
 		if !smsReceived:
+			$Phone/Sms.text = "Hey kid ! Sounds like\nyou need a hand.\nHow about an extra space\nin the ambulance ?!"
 			$Phone/Vibrate.play()	
 			smsReceived = true
+			bossHelp = true
 	
-	if timeElapsed % 40 == 0:
+	if timeElapsed % 40 == 0 and !beingOnPhone:
 		if !smsReceived:
+			$Phone/Sms.text = bossTexts[rng.randf_range(0, 3)]
 			$Phone/Vibrate.play()	
 			smsReceived = true
+			bossHelp = false
 	
 #	increase difficulty
 	if timeElapsed % 60 == 0:
@@ -120,7 +131,8 @@ func _on_GlobalTimer_timeout():
 		
 #	if sms not answered
 	if smsUnanswered <= 0 and !gameover:
-		if ambuMax > 0:
+		if ambuMax > 1:
+			get_node("Staffcabin").powerDown("-1 ambulance space..")
 			ambuMax -= 1
 		missedTexts += 1
 		smsReceived = false

@@ -50,10 +50,6 @@ margin_right = 93.0
 margin_bottom = -151.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.145098, 0.494118, 0.313726, 1 )
-text = "Hey kid ! Sounds like
-you're in trouble. I told
-the ambulance to add
-an extra space !"
 __meta__ = {
 "_edit_use_anchors_": false
 }

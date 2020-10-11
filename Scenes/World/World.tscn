@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scenes/Infirmary/Infirmary.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=2]
@@ -32,6 +32,8 @@
 [ext_resource path="res://Assets/Background/signlogo.png" type="Texture" id=30]
 [ext_resource path="res://Assets/Sounds/dump.wav" type="AudioStream" id=31]
 [ext_resource path="res://Scenes/World/StaticBody2D.gd" type="Script" id=32]
+[ext_resource path="res://Assets/Sounds/powerdown.wav" type="AudioStream" id=33]
+[ext_resource path="res://Assets/Sounds/powerup.wav" type="AudioStream" id=34]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -184,6 +186,41 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 1.0 ]
+}
+
+[sub_resource type="DynamicFont" id=7]
+size = 60
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 16 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "appear"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [node name="World" type="Node2D"]
@@ -449,6 +486,32 @@ z_index = 400
 [node name="remove" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 31 )
 volume_db = -9.342
+
+[node name="bonus" type="Label" parent="."]
+margin_left = 567.528
+margin_top = 320.02
+margin_right = 1361.53
+margin_bottom = 445.02
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "+1 Infirmary"
+align = 1
+valign = 1
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bonus"]
+anims/appear = SubResource( 8 )
+
+[node name="powerdown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 33 )
+volume_db = -7.738
+
+[node name="powerup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 34 )
+volume_db = -9.114
 [connection signal="input_event" from="UGOTFIRED" to="UGOTFIRED" method="_on_UGOTFIRED_input_event"]
 [connection signal="input_event" from="NOTCOOL" to="NOTCOOL" method="_on_NOTCOOL_input_event"]
 [connection signal="input_event" from="TalkingHead/StaticBody2D" to="TalkingHead/StaticBody2D" method="_on_StaticBody2D_input_event"]
