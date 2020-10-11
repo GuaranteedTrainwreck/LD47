@@ -82,7 +82,7 @@ func _physics_process(delta):
 			get_parent().get_node("Infirmary").ClickInfirmary()
 		$AnimationPlayer.play("selected")
 		get_parent().get_node("BeingCool/Clouds").visible = true
-		talkingHead(headlist[rng.randf_range(0, 3)], textlist[rng.randf_range(0, 5)])
+		talkingHead(headlist[rng.randf_range(0, 3)], textlist[rng.randf_range(0, 6)])
 		get_parent().get_node("BeingCool/BeingCoolAnim").play("smoke")
 		$Rock.play(8)
 		

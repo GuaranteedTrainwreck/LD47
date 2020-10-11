@@ -20,15 +20,18 @@ var chaosMax = 8
 var coolnessMax = 100
 var coolnessSubFactor = 1
 var spawnRate = 3
-var leavingRange = [8, 10]
-var incidentRange = [4, leavingRange[1]]
+var leavingRange = [10, 12]
+var incidentRange = [5, leavingRange[1]]
 
 #boss texting stuff
 var SmsBoss1 = "Hey kid ! How are\nthings over there ?\nAnother day another\ndollar hey !?"
 var SmsBoss2 = "Hey kid ! Kyle mixed up\nthe latest hoops order,\nso careful, they might\nbe a bit small.."
 var SmsBoss3 = "Hey kid ! If that dick\nfrom Palms News calls,\ntell him to go fuck\nhimself. Cheers !"
 var SmsBoss4 = "Hey kid ! Hope the staff\nis helping you a bit,\ninstead of jerking\neach other off.."
-var bossTexts = [SmsBoss1, SmsBoss2, SmsBoss3, SmsBoss4]
+var SmsBoss5 = "Hey kid ! If the neighbor\ncomes sniffing\naround just turn\nthe electric fence on"
+var SmsBoss6 = "Hey babe ! Excited about\ntonight ? I'm\ngetting horny by\nthe minute..."
+var bossTexts = [SmsBoss1, SmsBoss2, SmsBoss3, SmsBoss4, SmsBoss5, SmsBoss6]
+
 #create random
 var rng = RandomNumberGenerator.new()
 
@@ -72,7 +75,7 @@ func _ready():
 
 #AT RUNTIME
 func _physics_process(_delta):
-	
+	print(leavingRange)
 #	UI changes
 	get_node("Stats/Deaths").text = "Deaths : " + str(deathsTotal)
 	get_node("Stats/Incidents").text = "Choking : " + str(incidentsTotal)
@@ -111,17 +114,17 @@ func _on_GlobalTimer_timeout():
 	
 	if timeElapsed % 40 == 0 and !beingOnPhone:
 		if !smsReceived:
-			$Phone/Sms.text = bossTexts[rng.randf_range(0, 3)]
+			$Phone/Sms.text = bossTexts[rng.randf_range(0, 6)]
 			$Phone/Vibrate.play()	
 			smsReceived = true
 			bossHelp = false
 	
 #	increase difficulty
 	if timeElapsed % 60 == 0:
-		leavingRange[0] += 5
-		leavingRange[1] += 5
-	if timeElapsed % 90 == 0 and spawnRate > 0:
-		spawnRate -= 1
+		leavingRange[0] += 4
+		leavingRange[1] += 4
+	if timeElapsed % 150 == 0 :
+		spawnRate = 2
 		
 	
 #	start countdown to getting fired
