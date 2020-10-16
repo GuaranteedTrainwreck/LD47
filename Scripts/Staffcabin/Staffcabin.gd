@@ -53,28 +53,34 @@ func _physics_process(delta):
 		powerDown("-1 heal..")
 		talkingHead(staffhead3, text1)
 		get_parent().medicsMax = 1
+		get_parent().onDuty = 1		
 	if get_parent().coolness < 60 and get_parent().medicsMax > 2:
 		powerDown("-1 heal..")
 		talkingHead(staffhead2, text1)
 		get_parent().medicsMax = 2
+		get_parent().onDuty = 2
 	if get_parent().coolness < 90 and get_parent().medicsMax > 3:
 		powerDown("-1 heal..")
 		talkingHead(staffhead4, text1)
 		get_parent().medicsMax = 3
+		get_parent().onDuty = 3
 	if get_parent().coolness >= 30 and get_parent().medicsMax == 1:
 		powerUp("+1 heal !")
 		talkingHead(staffhead3, text0)	
 		get_parent().medicsMax = 2
+		get_parent().onDuty = 2
 	if get_parent().coolness >= 60 and  get_parent().medicsMax == 2:
 		powerUp("+1 heal !")
 		talkingHead(staffhead2, text0)
 		get_parent().medicsMax = 3
+		get_parent().onDuty = 3
 	if get_parent().coolness >= 90 and get_parent().medicsMax == 3:
 		powerUp("+1 heal !")
 		talkingHead(staffhead4, text0)
 		get_parent().medicsMax = 4
+		get_parent().onDuty = 4
 			
-	if Input.is_action_just_pressed("player_select") and !beingCool and !get_parent().beingOnPhone and targeted:
+	if Input.is_action_just_pressed("player_select") and !beingCool and !get_parent().beingOnPhone and targeted and get_parent().get_node("TalkingHead/StaticBody2D").bosstalk == false:
 		$CabinTimer.set_wait_time(1)
 		$CabinTimer.start()
 		beingCool = true

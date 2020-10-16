@@ -41,9 +41,9 @@ func _on_Phone_input_event(_viewport, event, _shape_idx):
 			$AnimatedSprite.play("nosms")
 			position = pos
 			typingDone = false
-			get_parent().coolness -= 10
 			get_parent().beingOnPhone = false
 			get_parent().smsUnanswered = smsWaitingTime
 			if get_parent().bossHelp:
 				get_parent().ambuMax += 1
+				get_parent().inAmbu += 1
 				get_parent().get_node("Staffcabin").powerUp("+1 ambulance space !")

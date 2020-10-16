@@ -37,7 +37,7 @@ func _ready():
 	$IncidentTimer.start()
 
 #	init countdown to death
-	$DeathTimer.set_wait_time(6)
+	$DeathTimer.set_wait_time(8)
 	
 #	fix spawn limits
 	var x = rng.randf_range(XMIN, XMAX)
@@ -81,6 +81,7 @@ func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 			Input.set_custom_mouse_cursor(null)
 			get_parent().infirmaryClicked = false
 			get_parent().get_node("Infirmary/AnimatedSprite").get_material().set_shader_param("outline_width", 0)
+			get_parent().onDuty = get_parent().medicsMax
 		
 #	remove dead body
 	if event.is_action_pressed("player_select") and dead and get_parent().ambulanceClicked:
@@ -93,20 +94,20 @@ func _on_HulaHooper_input_event(_viewport, event, _shape_idx):
 #		change global values
 		get_parent().get_node("Ambulance/AnimatedSprite").get_material().set_shader_param("outline_width", 0)
 		get_parent().deathsTotal -= 1
-		get_parent().inAmbu += 1
+		get_parent().inAmbu -= 1
 		
 #		cancel click / finish action
-		if get_parent().inAmbu >= get_parent().ambuMax or get_parent().deathsTotal == 0:
+		if get_parent().inAmbu == 0 or get_parent().deathsTotal == 0:
 			Input.set_custom_mouse_cursor(null)
 			get_parent().ambulanceReady = false
 			get_parent().ambulanceClicked = false
 			get_parent().get_node("Ambulance").get_node("Departure").play("departure")
+			get_parent().inAmbu = get_parent().ambuMax
 
 #	death
 func _on_DeathTimer_timeout():
 	suffocating = false
 	dead = true
-	get_parent().inAmbu = 0
 	get_parent().incidentsTotal -= 1
 	get_parent().deathsTotal += 1
 	get_node(characterName).play("dead")
@@ -123,4 +124,8 @@ func _on_IncidentTimer_timeout():
 func _on_LeavingTimer_timeout():
 	if suffocating:
 		get_parent().incidentsTotal -= 1
-	self.queue_free()
+		$LeavingTimer.stop()
+		$LeavingTimer.set_wait_time(rng.randf_range(get_parent().leavingRange[0], get_parent().leavingRange[1]))
+		$LeavingTimer.start()
+	else:
+		self.queue_free()

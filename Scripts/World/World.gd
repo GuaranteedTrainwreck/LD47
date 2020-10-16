@@ -16,7 +16,7 @@ var smsUnanswered = 0
 var spawnCountdown = 2
 
 #variable settings
-var chaosMax = 8
+var chaosMax = 10
 var coolnessMax = 100
 var coolnessSubFactor = 1
 var spawnRate = 3
@@ -29,8 +29,15 @@ var SmsBoss2 = "Hey kid ! Kyle mixed up\nthe latest hoops order,\nso careful, th
 var SmsBoss3 = "Hey kid ! If that dick\nfrom Palms News calls,\ntell him to go fuck\nhimself. Cheers !"
 var SmsBoss4 = "Hey kid ! Hope the staff\nis helping you a bit,\ninstead of jerking\neach other off.."
 var SmsBoss5 = "Hey kid ! If the neighbor\ncomes sniffing\naround just turn\nthe electric fence on"
-var SmsBoss6 = "Hey babe ! Excited about\ntonight ? I'm\ngetting horny by\nthe minute..."
+var SmsBoss6 = "Hey babe ! Excited about\ntonight ? I'm\ngetting horny by\nthe minute.."
 var bossTexts = [SmsBoss1, SmsBoss2, SmsBoss3, SmsBoss4, SmsBoss5, SmsBoss6]
+var answer1 = "Everything\nis ok !!"
+var answer2 = "Ok that makes\nmore sense.."
+var answer3 = "Will do !!"
+var answer4 = "Yes, everyone\nis on duty !!"
+var answer5 = "The electric\nwhat now ??"
+var answer6 = "Hu..\nwrong number ??"
+var answers = [answer1, answer2, answer3, answer4,answer5, answer6]
 
 #create random
 var rng = RandomNumberGenerator.new()
@@ -47,11 +54,11 @@ var talkingHeadEnded = false
 var bossHelp = false
 
 #infirmary variables
-var onDuty = 0
+var onDuty = 1
 var medicsMax = 1
 
 #ambulance variables
-var inAmbu = 0
+var inAmbu = 1
 var ambuMax = 1
 
 #dancefloor things
@@ -70,18 +77,20 @@ func _ready():
 	
 #	init timer
 	timer.set_wait_time(1)
+	
+	gameover = false
 
 
 
 #AT RUNTIME
 func _physics_process(_delta):
-	print(leavingRange)
 #	UI changes
-	get_node("Stats/Deaths").text = "Deaths : " + str(deathsTotal)
-	get_node("Stats/Incidents").text = "Choking : " + str(incidentsTotal)
-	get_node("Stats/Coolness").text = "Coolness : " + str(coolness) + "/" + str(coolnessMax)
-	get_node("Stats/Chaos").text = "Missed texts : " + str(missedTexts) + "/3"
+	get_node("Stats/Deaths").text = str(inAmbu) + "/" + str(ambuMax)
+	get_node("Stats/Incidents").text = str(onDuty) + "/" + str(medicsMax)
+	get_node("Stats/Coolness").text = str(coolness) + "/" + str(coolnessMax)
+	get_node("Stats/Chaos").text = str(missedTexts) + "/3"
 	get_node("Stats/Time").text = "Time : " + str(timeElapsed)
+	get_node("Stats/Warning").text = str(chaos) + "/" + str(chaosMax)	
 
 #	spawn Hoopers
 	if spawnCountdown <= 0:
@@ -107,14 +116,17 @@ func _on_GlobalTimer_timeout():
 #	if chaos limit reached
 	if deathsTotal >= 2 and !beingOnPhone and timeElapsed % 15 == 0:
 		if !smsReceived:
-			$Phone/Sms.text = "Hey kid ! Sounds like\nyou need a hand.\nHow about an extra space\nin the ambulance ?!"
+			$Phone/Sms.text = "Hey kid ! Sounds like\nyou need a hand.\nHow about an extra\nspace in the ambulance ?!"
+			$Phone/Response.text = "Great\nthanks boss !"
 			$Phone/Vibrate.play()	
 			smsReceived = true
 			bossHelp = true
 	
 	if timeElapsed % 40 == 0 and !beingOnPhone:
 		if !smsReceived:
-			$Phone/Sms.text = bossTexts[rng.randf_range(0, 6)]
+			var rand = rng.randf_range(0, 6)
+			$Phone/Sms.text = bossTexts[rand]
+			$Phone/Response.text = answers[rand]
 			$Phone/Vibrate.play()	
 			smsReceived = true
 			bossHelp = false
@@ -137,20 +149,21 @@ func _on_GlobalTimer_timeout():
 		if ambuMax > 1:
 			get_node("Staffcabin").powerDown("-1 ambulance space..")
 			ambuMax -= 1
+			inAmbu -= 1
 		missedTexts += 1
 		smsReceived = false
 		smsUnanswered = 10
 		get_node("Phone/Countdown").text = ""
 		if missedTexts >= 3:
 			$UGOTFIRED.visible = true
+			$UGOTFIRED/endTime.text = "Time : " + str(timeElapsed)
 			gameover = true
 			$GlobalTimer.stop()
 	
-#	display not-cool message
-#	if coolness <= 0 and !gameover:
-#		$NOTCOOL.visible = true
-#		gameover = true
-#		$GlobalTimer.stop()
+	if chaos >= chaosMax and !gameover:
+		$NOTCOOL.visible = true
+		gameover = true
+		$GlobalTimer.stop()
 	
 #	dancefloor change colors
 	if timeElapsed % 2 == 0:

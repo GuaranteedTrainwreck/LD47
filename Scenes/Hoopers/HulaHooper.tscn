@@ -40,74 +40,74 @@ extents = Vector2( 32, 40 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "hooping",
-"speed": 6.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 5 ) ],
-"loop": false,
-"name": "suffocating",
-"speed": 0.6
-}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "dead",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "suffocating",
+"speed": 0.5
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "hooping",
+"speed": 6.0
 } ]
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "hooping",
-"speed": 6.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "suffocating",
-"speed": 0.6
-}, {
 "frames": [ ExtResource( 17 ) ],
 "loop": true,
 "name": "dead",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "suffocating",
+"speed": 0.5
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "hooping",
+"speed": 6.0
 } ]
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 21 ), ExtResource( 25 ), ExtResource( 18 ) ],
-"loop": true,
-"name": "hooping",
-"speed": 6.0
-}, {
-"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "suffocating",
-"speed": 0.6
-}, {
 "frames": [ ExtResource( 20 ) ],
 "loop": true,
 "name": "dead",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "suffocating",
+"speed": 0.5
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 25 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "hooping",
+"speed": 6.0
 } ]
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ],
-"loop": true,
-"name": "hooping",
-"speed": 6.0
-}, {
-"frames": [ ExtResource( 32 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 33 ) ],
-"loop": true,
-"name": "suffocating",
-"speed": 0.6
-}, {
 "frames": [ ExtResource( 28 ) ],
 "loop": true,
 "name": "dead",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 32 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "suffocating",
+"speed": 0.5
+}, {
+"frames": [ ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ],
+"loop": true,
+"name": "hooping",
+"speed": 6.0
 } ]
 
 [node name="HulaHooper" type="StaticBody2D"]

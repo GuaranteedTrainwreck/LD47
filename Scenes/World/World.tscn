@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scenes/Infirmary/Infirmary.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World/World.gd" type="Script" id=2]
@@ -19,7 +19,7 @@
 [ext_resource path="res://Assets/Background/dancefloor3.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Background/dancefloor1.png" type="Texture" id=18]
 [ext_resource path="res://Scenes/Tuto/Tuto.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Assets/EndScreens/notcool.png" type="Texture" id=20]
+[ext_resource path="res://Assets/EndScreens/totalchaos.png" type="Texture" id=20]
 [ext_resource path="res://Assets/EndScreens/gotfired.png" type="Texture" id=21]
 [ext_resource path="res://Assets/BeingCool/banner.png" type="Texture" id=22]
 [ext_resource path="res://Assets/StaffCabin/cloud2.png" type="Texture" id=23]
@@ -34,15 +34,24 @@
 [ext_resource path="res://Scenes/World/StaticBody2D.gd" type="Script" id=32]
 [ext_resource path="res://Assets/Sounds/powerdown.wav" type="AudioStream" id=33]
 [ext_resource path="res://Assets/Sounds/powerup.wav" type="AudioStream" id=34]
+[ext_resource path="res://Assets/Cursors/glasses.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Cursors/heal.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Cursors/death.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Cursors/missed.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Cursors/warning.png" type="Texture" id=39]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
 font_data = ExtResource( 16 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 16 )
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 960, 540 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 13.0
 loop = true
 tracks/0/type = "value"
@@ -142,14 +151,14 @@ tracks/7/keys = {
 "values": [ Vector2( 1464, 800 ), Vector2( 168, 832 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 974.216, 567.54 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 20
 font_data = ExtResource( 16 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("talkinghead:position")
@@ -188,15 +197,14 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0, 1.0 ]
 }
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 size = 60
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 16 )
 
-[sub_resource type="Animation" id=8]
-resource_name = "appear"
+[sub_resource type="Animation" id=9]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:percent_visible")
@@ -226,7 +234,8 @@ tracks/1/keys = {
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_horizontal_guides_": [  ]
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [ 45.7529 ]
 }
 
 [node name="Backgrounds" type="Node2D" parent="."]
@@ -288,59 +297,90 @@ texture = ExtResource( 30 )
 [node name="Stats" type="Node2D" parent="."]
 
 [node name="Coolness" type="Label" parent="Stats"]
-margin_left = 515.0
-margin_top = 3.0
-margin_right = 667.0
-margin_bottom = 35.0
+margin_left = 47.0
+margin_top = 102.0
+margin_right = 199.0
+margin_bottom = 134.0
 custom_fonts/font = SubResource( 1 )
-text = "Coolness :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="glasses" type="Sprite" parent="Stats/Coolness"]
+position = Vector2( -24.6406, 14.3845 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 35 )
+
 [node name="Time" type="Label" parent="Stats"]
-margin_left = 1267.5
-margin_top = 3.11666
-margin_right = 1419.5
-margin_bottom = 35.1167
+margin_left = 843.734
+margin_top = 11.887
+margin_right = 1041.73
+margin_bottom = 43.887
 custom_fonts/font = SubResource( 1 )
-text = "Time Elapsed :"
+text = "Time :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Deaths" type="Label" parent="Stats"]
-margin_left = 16.0
-margin_top = 2.0
-margin_right = 137.0
-margin_bottom = 34.0
+margin_left = 46.0
+margin_top = 17.0
+margin_right = 167.0
+margin_bottom = 49.0
 custom_fonts/font = SubResource( 1 )
-text = "Deaths :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="death" type="Sprite" parent="Stats/Deaths"]
+position = Vector2( -22.2794, 15.8634 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 37 )
 
 [node name="Incidents" type="Label" parent="Stats"]
-margin_left = 231.0
-margin_top = 3.0
-margin_right = 385.0
-margin_bottom = 35.0
+margin_left = 46.0
+margin_top = 61.0
+margin_right = 200.0
+margin_bottom = 93.0
 custom_fonts/font = SubResource( 1 )
-text = "Choking :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="heal" type="Sprite" parent="Stats/Incidents"]
+position = Vector2( -23.9456, 14.5772 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 36 )
+
 [node name="Chaos" type="Label" parent="Stats"]
-margin_left = 857.0
-margin_top = 3.0
-margin_right = 1063.0
-margin_bottom = 35.0
+margin_left = 46.5108
+margin_top = 140.849
+margin_right = 252.511
+margin_bottom = 172.849
 custom_fonts/font = SubResource( 1 )
-text = "Missed texts :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="missed" type="Sprite" parent="Stats/Chaos"]
+position = Vector2( -24.1871, 14.718 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 38 )
+
+[node name="Warning" type="Label" parent="Stats"]
+margin_left = 46.5108
+margin_top = 178.849
+margin_right = 252.511
+margin_bottom = 210.849
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="missed" type="Sprite" parent="Stats/Warning"]
+position = Vector2( -24.1871, 14.718 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 39 )
 
 [node name="UGOTFIRED" type="StaticBody2D" parent="."]
 visible = false
@@ -353,9 +393,21 @@ script = ExtResource( 26 )
 position = Vector2( 552, 312 )
 texture = ExtResource( 21 )
 
+[node name="endTime" type="Label" parent="UGOTFIRED"]
+visible = false
+margin_left = 403.0
+margin_top = -30.0
+margin_right = 723.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 2 )
+text = "Time :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UGOTFIRED"]
 position = Vector2( 551, 317 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="NOTCOOL" type="StaticBody2D" parent="."]
 visible = false
@@ -370,12 +422,12 @@ texture = ExtResource( 20 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="NOTCOOL"]
 position = Vector2( 551, 317 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="BeingCool" type="Node2D" parent="."]
 
 [node name="BeingCoolAnim" type="AnimationPlayer" parent="BeingCool"]
-anims/smoke = SubResource( 3 )
+anims/smoke = SubResource( 4 )
 
 [node name="Clouds" type="Node2D" parent="BeingCool"]
 visible = false
@@ -425,7 +477,7 @@ script = ExtResource( 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TalkingHead/StaticBody2D"]
 position = Vector2( 796.27, -386.453 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="talkinghead" type="Sprite" parent="TalkingHead"]
 position = Vector2( 54.796, 264 )
@@ -443,7 +495,7 @@ margin_left = 373.262
 margin_top = -161.342
 margin_right = 971.262
 margin_bottom = 3.65802
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "[KYLE]
 
 WOW MAN WE ALL THOUGHT YOU WERE
@@ -456,7 +508,7 @@ __meta__ = {
 }
 
 [node name="banneranim" type="AnimationPlayer" parent="TalkingHead"]
-anims/appear = SubResource( 6 )
+anims/appear = SubResource( 7 )
 
 [node name="Infirmary" parent="." instance=ExtResource( 1 )]
 position = Vector2( 382.845, 294.044 )
@@ -492,7 +544,7 @@ margin_left = 567.528
 margin_top = 320.02
 margin_right = 1361.53
 margin_bottom = 445.02
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "+1 Infirmary"
 align = 1
@@ -503,7 +555,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="bonus"]
-anims/appear = SubResource( 8 )
+anims/appear = SubResource( 9 )
 
 [node name="powerdown" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 33 )
